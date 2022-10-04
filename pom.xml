@@ -15,6 +15,9 @@
         <jkube.version>0.6.8</jkube.version>
         <maven.compiler.source>15</maven.compiler.source>
         <maven.compiler.target>15</maven.compiler.target>
+        <dockerfile.skip>false</dockerfile.skip>
+        <docker.image>git-beaver</docker.image>
+        <main.class>org.jkube.gitbeaver.Main</main.class>
     </properties>
     <dependencies>
         <dependency>

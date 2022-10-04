@@ -1,0 +1,18 @@
+image: jkube/maven:15-alpine
+
+pipelines:
+  default:
+    - step:
+        name: Docker image for branch
+        services:
+          - docker
+        script:
+          - docker-build $DOCKER_HUB_PASSWORD $BITBUCKET_BRANCH
+  tags:
+    '**':
+      - step:
+          name: Docker image for tag
+          services:
+            - docker
+          script:
+            - docker-build $DOCKER_HUB_PASSWORD $BITBUCKET_TAG

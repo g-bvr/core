@@ -19,17 +19,21 @@ public class GitCloner {
         if (simulateClonePath != null) {
             Path sourcePath = createSimulatedGitPath(repository, tag);
             Path targetPath = workdir.resolve(repository);
-            FileUtil.createIfNotExists(targetPath);
+            FileUtil.createIfNotExists(targetPath.getParent());
             FileUtil.copyTree(sourcePath, targetPath);
         } else {
             ExternalProcess clone = new ExternalProcess();
             String repoUrl = gitUrl.toString()+"/"+repository;
             if (tag == null) {
-                clone.command("git", "clone", "-c", "advice.detachedHead=false", "-b", tag, repoUrl);
-            } else {
                 clone.command("git", "clone", repoUrl);
+            } else {
+                clone.command("git", "clone", "-c", "advice.detachedHead=false", "-b", tag, repoUrl);
             }
-            clone.dir(workdir).logConsole(new DefaultLogConsole()).execute();
+            clone
+                .dir(workdir)
+                .successMarker("Cloning into ")
+                .logConsole(new DefaultLogConsole())
+                .execute();
         }
     }
 

@@ -14,7 +14,7 @@ public class GitBeaver {
     private static final String MAIN_VARIABLE = "main";
     private static final String MAIN_DEFAULT = "main.bvr";
     private static final String WORKDIR_VARIABLE = "workdir";
-    private static final String WORKDIR_DEFAULT = ".";
+    private static final String WORKDIR_DEFAULT = "workdir";
 
     private static final GitBeaver SINGLETON = new GitBeaver();
 

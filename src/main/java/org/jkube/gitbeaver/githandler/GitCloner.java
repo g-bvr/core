@@ -1,5 +1,6 @@
 package org.jkube.gitbeaver.githandler;
 
+import org.jkube.gitbeaver.util.ExternalProcess;
 import org.jkube.gitbeaver.util.FileUtil;
 
 import java.net.URL;
@@ -20,8 +21,14 @@ public class GitCloner {
             FileUtil.createIfNotExists(targetPath);
             FileUtil.copyTree(sourcePath, targetPath);
         } else {
-            // TODO
-            throw new RuntimeException("not yet implemented");
+            ExternalProcess clone = new ExternalProcess();
+            String repoUrl = gitUrl.toString()+"/"+repository;
+            if (tag == null) {
+                clone.command("git", "clone", "-c", "advice.detachedHead=false", "-b", tag, repoUrl);
+            } else {
+                clone.command("git", "clone", repoUrl);
+            }
+            clone.dir(workdir).execute();
         }
     }
 

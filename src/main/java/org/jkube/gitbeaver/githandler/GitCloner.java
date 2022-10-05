@@ -1,5 +1,6 @@
 package org.jkube.gitbeaver.githandler;
 
+import org.jkube.gitbeaver.DefaultLogConsole;
 import org.jkube.gitbeaver.util.ExternalProcess;
 import org.jkube.gitbeaver.util.FileUtil;
 
@@ -28,7 +29,7 @@ public class GitCloner {
             } else {
                 clone.command("git", "clone", repoUrl);
             }
-            clone.dir(workdir).execute();
+            clone.dir(workdir).logConsole(new DefaultLogConsole()).execute();
         }
     }
 

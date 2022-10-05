@@ -54,8 +54,9 @@ public class ExternalProcess {
 		return this;
 	}
 
-	public void setLogConsole(LogConsole logConsole) {
+	public ExternalProcess logConsole(LogConsole logConsole) {
 		this.logConsole = logConsole;
+		return this;
 	}
 
 	public ExternalProcess dir(String directory) {

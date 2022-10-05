@@ -15,7 +15,7 @@ public class GitCloner {
     }
 
     public void clone(Path workdir, URL gitUrl, String repository, String tag) {
-        if (simulateClonePath == null) {
+        if (simulateClonePath != null) {
             Path sourcePath = createSimulatedGitPath(repository, tag);
             Path targetPath = workdir.resolve(repository);
             FileUtil.createIfNotExists(targetPath);

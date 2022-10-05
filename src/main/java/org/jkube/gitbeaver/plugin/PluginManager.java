@@ -48,7 +48,7 @@ public class PluginManager {
 
     public void enable(String pluginClass) {
         if (checkPluginsNotFrozen()) {
-            Class<?> cls = onException(() -> Class.forName(pluginClass, true, classLoader))
+            Class<?> cls = onException(() -> Class.forName(pluginClass, true, getClass().getClassLoader()))
                     .fail("Could not load class: " + pluginClass);
             Plugin plugin = onException(() -> (Plugin) cls.getConstructor().newInstance())
                     .fail("Could not instantiatxe class: " + pluginClass);

@@ -15,5 +15,5 @@ pipelines:
           services:
             - docker
           script:
-            - sed -i "s~<properties>~<properties><docker.repo.password>$DOCKER_HUB_PASSWORD</docker.repo.password>~" pom.xml
+            - sed -i "s~<properties>~<properties><docker.repo.password>GITBEAVER_PASSWORD</docker.repo.password>~" pom.xml
             - mvn -B package -Dgit.branch=$BITBUCKET_TAG

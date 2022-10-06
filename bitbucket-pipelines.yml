@@ -15,4 +15,5 @@ pipelines:
           services:
             - docker
           script:
-            - docker-build $DOCKER_HUB_PASSWORD $BITBUCKET_TAG
+            - sed -i "s~<properties>~<properties><docker.repo.password>$DOCKER_HUB_PASSWORD</docker.repo.password>~" pom.xml
+            - mvn -B package -Dgit.branch=$BITBUCKET_TAG

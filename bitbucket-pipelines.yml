@@ -7,7 +7,8 @@ pipelines:
         services:
           - docker
         script:
-          - docker-build $DOCKER_HUB_PASSWORD $BITBUCKET_BRANCH
+          - sed -i "s~<properties>~<properties><docker.repo.password>$GITBEAVER_PUSH_TOKEN</docker.repo.password>~" pom.xml
+          - mvn -B package -Dgit.branch=$BITBUCKET_BRANCH
   tags:
     '**':
       - step:

@@ -1,5 +1,6 @@
 package org.jkube.gitbeaver.command;
 
+import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.WorkSpace;
@@ -13,21 +14,10 @@ import static org.jkube.logging.Log.onException;
 /**
  * Usage: git clone providerUrl repositoryName [tag]
  */
-public class GitCloneCommand implements Command {
+public class GitCloneCommand extends AbstractCommand {
 
-    @Override
-    public int minNumArgs() {
-        return 2;
-    }
-
-    @Override
-    public Integer maxNumArgs() {
-        return 3;
-    }
-
-    @Override
-    public List<String> keywords() {
-        return List.of("git", "clone");
+    public GitCloneCommand() {
+        super(2, 3, "git", "clone");
     }
 
     @Override

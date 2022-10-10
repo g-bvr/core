@@ -11,6 +11,9 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.jkube.logging.Log.exception;
@@ -31,9 +34,9 @@ public class PluginCompiler {
     public void compile(Path sourcePath) {
         if (PluginManager.checkPluginsNotFrozen()) {
             try (Stream<Path> walk = Files.walk(sourcePath)) {
-                walk.filter(Files::isRegularFile)
+                compileFiles(walk.filter(Files::isRegularFile)
                         .filter(this::isJavaFile)
-                        .forEach(this::compileFile);
+                        .collect(Collectors.toList()));
             } catch (IOException e) {
                 Log.exception(e);
             }
@@ -44,9 +47,13 @@ public class PluginCompiler {
         return path.toString().endsWith(JAVA_EXTENSION);
     }
 
-    private void compileFile(Path path) {
-        Log.log("Compiling "+path);
-        compiler.run(null, null, null, "-d", targetPath.toString(), path.toString());
+    private void compileFiles(List<Path> javaFiles) {
+        Log.log("Compiling "+javaFiles.size()+" java files:");
+        List<String> args = new ArrayList<>();
+        args.add("-d");
+        args.add(targetPath.toString());
+        javaFiles.forEach(jf -> args.add(jf.toString()));
+        compiler.run(null, null, null, args.toArray(new String[0]));
     }
 
 

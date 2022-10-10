@@ -48,12 +48,14 @@ public class PluginCompiler {
     }
 
     private void compileFiles(List<Path> javaFiles) {
-        Log.log("Compiling "+javaFiles.size()+" java files:");
+        long timestamp = System.currentTimeMillis();
+        Log.log("Compiling {} java files...", javaFiles.size());
         List<String> args = new ArrayList<>();
         args.add("-d");
         args.add(targetPath.toString());
         javaFiles.forEach(jf -> args.add(jf.toString()));
         compiler.run(null, null, null, args.toArray(new String[0]));
+        Log.log("... done ({}ms)", System.currentTimeMillis()-timestamp);
     }
 
 

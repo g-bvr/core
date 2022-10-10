@@ -20,11 +20,13 @@ public class WorkSpace {
 
     public Path getAbsolutePath(String relativePath) {
         Path resolvedPath = workdir.resolve(relativePath);
-        Path realPath = onException(() -> resolvedPath.toRealPath())
-                .fail("could not get real path: "+resolvedPath);
-        Expect.isTrue(realPath.startsWith(workdir))
-                .elseFail("Resolved path is outside workspace: "+realPath);
-        return realPath;
+        Path parentPath = resolvedPath.getParent();
+        Path child = resolvedPath.getFileName();
+        Path parentRealPath = onException(() -> parentPath.toRealPath())
+                .fail("could not get parent's real path: "+resolvedPath);
+        Expect.isTrue(parentRealPath.startsWith(workdir))
+                .elseFail("Resolved path's parent is outside workspace: "+parentPath);
+        return parentRealPath.resolve(child);
     }
 
 }

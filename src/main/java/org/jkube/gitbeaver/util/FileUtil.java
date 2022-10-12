@@ -9,13 +9,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.jkube.logging.Log.onException;
 
 public class FileUtil {
 
-    public static void clear(Path directory) {
+    public static void empty(Path directory) {
         clearRecursively(directory.toFile(), false);
     }
 
@@ -55,4 +57,37 @@ public class FileUtil {
                     .elseFail("Could not create target directory "+path);
         }
     }
+
+    public static void expectEqualTrees(Path path1, Path path2) {
+        File file1 = path1.toFile();
+        File file2 = path2.toFile();
+        Expect.equal(file1.isDirectory(), file2.isDirectory())
+                .elseFail("Mismatching file type "+file1+" vs. "+file2);
+        if (file1.isDirectory()) {
+            String[] files1 = file1.list();
+            if (files1 == null) {
+                files1 = new String[0];
+            }
+            String[] files2 = file2.list();
+            if (files2 == null) {
+                files2 = new String[0];
+            }
+            Expect.equal(files1.length, files2.length);
+            Arrays.sort(files1);
+            Arrays.sort(files2);
+            for (int i = 0; i < files1.length; i++) {
+                Expect.equal(files1[i], files2[i]).elseFail("Mismatching files " + files1[i] + " vs. " + files2[i]);
+                expectEqualTrees(path1.resolve(files1[i]), path2.resolve(files2[i]));
+            }
+        } else {
+            List<String> lines1 = onException(()-> Files.readAllLines(path1)).fail("Could not load file "+path1);
+            List<String> lines2 = onException(()-> Files.readAllLines(path2)).fail("Could not load file "+path2);
+            Expect.equal(lines1.size(), lines2.size()).elseFail("Mismatching number of lines: "+path1+" ("+lines1.size()+") vs. "+path2+" ("+lines2.size()+")");
+            for (int i = 0; i < lines1.size(); i++) {
+                Expect.equal(lines1.get(i), lines2.get(i)).elseFail("Mismatching line #" + i +
+                        " in file "+path1+ " vs. " + path2+": \n"+lines1.get(i)+"\n"+lines2.get(i));
+            }
+        }
+    }
+
 }

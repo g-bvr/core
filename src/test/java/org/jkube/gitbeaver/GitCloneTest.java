@@ -1,8 +1,8 @@
 package org.jkube.gitbeaver;
 
 import org.jkube.gitbeaver.githandler.GitCloner;
-import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.gitbeaver.util.FileUtil;
+import org.jkube.gitbeaver.util.test.TestUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,8 +12,6 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GitCloneTest {
 

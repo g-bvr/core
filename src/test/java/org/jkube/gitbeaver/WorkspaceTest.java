@@ -1,15 +1,12 @@
 package org.jkube.gitbeaver;
 
-import org.jkube.application.Application;
-import org.jkube.gitbeaver.WorkSpace;
+import org.jkube.gitbeaver.util.test.TestUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -37,7 +34,7 @@ public class WorkspaceTest {
     @Test
     void testPathOutside() {
         WorkSpace w = new WorkSpace(SRC_TEST_RESOURCES);
-        Path p = w.getAbsolutePath("../");
+        Path p = w.getAbsolutePath("../xxx");
         TestUtil.assertFailure();
     }
 

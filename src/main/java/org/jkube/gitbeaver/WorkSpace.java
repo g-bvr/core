@@ -29,4 +29,12 @@ public class WorkSpace {
         return parentRealPath.resolve(child);
     }
 
+    public Path getRelativePath(Path absolutePath) {
+        Path realPath = onException(() -> absolutePath.toRealPath())
+                .fail("could not get real path: "+absolutePath);
+        Expect.isTrue(realPath.startsWith(workdir))
+                .elseFail("Path is outside workspace: "+realPath);
+        return workdir.relativize(absolutePath);
+
+    }
 }

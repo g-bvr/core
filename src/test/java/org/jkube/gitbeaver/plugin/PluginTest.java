@@ -1,13 +1,9 @@
 package org.jkube.gitbeaver.plugin;
 
-import org.jkube.application.Application;
-import org.jkube.application.FailureHandler;
 import org.jkube.gitbeaver.GitBeaver;
-import org.jkube.gitbeaver.TestUtil;
+import org.jkube.gitbeaver.util.test.TestUtil;
 import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.interfaces.Command;
-import org.jkube.gitbeaver.plugin.PluginCompiler;
-import org.jkube.gitbeaver.plugin.PluginManager;
 import org.jkube.gitbeaver.util.Environment;
 import org.jkube.logging.Log;
 import org.junit.jupiter.api.Assertions;

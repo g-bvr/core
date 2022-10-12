@@ -38,6 +38,10 @@ public class GitBeaver {
         return SINGLETON.fileResolver;
     }
 
+    public static ScriptExecutor scriptExecutor() {
+        return SINGLETON.scriptExecutor;
+    }
+
     public static void setFileResolver(FileResolver fileResolver) {
         SINGLETON.fileResolver = fileResolver;
     }

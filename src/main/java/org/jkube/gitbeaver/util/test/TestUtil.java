@@ -1,8 +1,6 @@
-package org.jkube.gitbeaver;
+package org.jkube.gitbeaver.util.test;
 
 import org.jkube.application.Application;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +9,6 @@ public class TestUtil {
 
     private final static List<String> failures = new ArrayList<>();
 
-    @BeforeAll
     public static void beforeTests() {
         Application.setFailureHandler((message, code) -> {
             System.err.println("Failure captured: "+message);
@@ -25,12 +22,14 @@ public class TestUtil {
 
 
     public static void assertFailure() {
-        Assertions.assertEquals(1, failures.size());
+        if (failures.size() != 1)
+            throw new RuntimeException("expected exactly one failure, got: "+failures.size());
         failures.clear();
     }
 
     public static void assertNoFailures() {
-        Assertions.assertTrue(failures.isEmpty());
+        if (failures.size() != 0)
+            throw new RuntimeException("there were unexpected failures");
     }
 
 }

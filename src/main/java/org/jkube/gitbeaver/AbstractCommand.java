@@ -1,6 +1,7 @@
 package org.jkube.gitbeaver;
 
 import org.jkube.gitbeaver.interfaces.Command;
+import org.jkube.util.Expect;
 
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,10 @@ public abstract class AbstractCommand implements Command {
     @Override
     public List<String> keywords() {
         return keywords;
+    }
+
+    protected void expectArg(int pos, String expected, List<String> arguments) {
+        Expect.isTrue(expected.equalsIgnoreCase(arguments.get(pos))).elseFail("Expected '"+expected+"' at position "+pos+", got: "+arguments.get(pos));
     }
 
 }

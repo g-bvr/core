@@ -17,7 +17,7 @@ import static org.jkube.logging.Log.onException;
 
 public class FileUtil {
 
-    public static void empty(Path directory) {
+    public static void clear(Path directory) {
         clearRecursively(directory.toFile(), false);
     }
 
@@ -42,9 +42,11 @@ public class FileUtil {
     public static void copyTree(Path sourcePath, Path targetPath) {
         try(Stream<Path> files = Files.walk(sourcePath)) {
                 files.forEach(source -> {
-                Path destination = Paths.get(String.valueOf(targetPath), source.toString().substring(sourcePath.toString().length()));
-                onException(() -> Files.copy(source, destination)).fail("Could not copy " + source + " to " + destination);
-            });
+                        Path destination = targetPath.resolve(sourcePath.relativize(source));
+                        if (!destination.toFile().isDirectory()) {
+                            onException(() -> Files.copy(source, destination)).fail("Could not copy " + source + " to " + destination);
+                        }
+                    });
         } catch (IOException e) {
             Application.fail("Could not walk files in "+sourcePath);
         }

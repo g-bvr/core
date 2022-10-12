@@ -22,7 +22,10 @@ public class GitCloneTest {
     private static final String REPOSITORY = "git-beaver-base";
 
     @BeforeAll
-    static void beforeTests() { TestUtil.beforeTests(); }
+    static void beforeTests() {
+        TestUtil.beforeTests();
+        FileUtil.createIfNotExists(Path.of(WORKDIR));
+    }
 
     @BeforeEach
     void beforeEachTests() { TestUtil.beforeEachTest(); }

@@ -28,7 +28,8 @@ public class ScriptExecutor {
 
     private void executeLine(String line, Map<String, String> variables, WorkSpace workSpace) {
         List<String> arguments = new ArrayList<>();
-        Command command = commandParser.parseCommand(line, arguments);
+        String substituted = DefaultFileResolver.substituteVariables(line, variables);
+        Command command = commandParser.parseCommand(substituted, arguments);
         if (command != null) {
             command.execute(variables, workSpace, arguments);
         }

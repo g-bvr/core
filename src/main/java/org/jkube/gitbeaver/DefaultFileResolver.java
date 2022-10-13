@@ -17,10 +17,7 @@ public class DefaultFileResolver implements FileResolver {
 
     @Override
     public List<String> resolve(Path workspacePath, Path filePath, Map<String, String> variables) {
-        return onException(() -> Files.readAllLines(filePath)).fail("Could not load lines of file: "+filePath)
-                .stream()
-                .map(line -> substituteVariables(line, variables))
-                .collect(Collectors.toList());
+        return onException(() -> Files.readAllLines(filePath)).fail("Could not load lines of file: "+filePath);
     }
 
     public static String substituteVariables(final String line, Map<String, String> variables) {

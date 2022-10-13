@@ -1,2 +1,2 @@
 #!/bin/sh
-java -cp main.jar:plugins org.jkube.gitbeaver.Main $*
+java -cp main.jar:plugins org.jkube.gitbeaver.Main $@

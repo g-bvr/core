@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>git-beaver</artifactId>
-    <version>0.0.1</version>
+    <version>${release}</version>
     <parent>
         <groupId>org.jkube</groupId>
         <artifactId>parent</artifactId>
@@ -16,7 +16,7 @@
         <maven.compiler.source>15</maven.compiler.source>
         <maven.compiler.target>15</maven.compiler.target>
         <dockerfile.skip>false</dockerfile.skip>
-        <docker.image>core-${version}</docker.image>
+        <docker.image>core</docker.image>
         <docker.repo.user>gitbeaver</docker.repo.user>
         <main.class>org.jkube.gitbeaver.Main</main.class>
     </properties>

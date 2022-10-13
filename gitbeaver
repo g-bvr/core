@@ -1,2 +1,10 @@
 #!/bin/sh
 java -cp main.jar:plugins org.jkube.gitbeaver.Main $@
+EXITCODE=$?
+if test $EXITCODE -ne 0
+then
+  echo Gitbeaver returned exit code $EXITCODE
+  exit $EXITCODE
+else
+  echo Gitbeaver terminated normally
+fi

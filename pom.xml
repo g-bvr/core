@@ -16,7 +16,7 @@
         <maven.compiler.source>15</maven.compiler.source>
         <maven.compiler.target>15</maven.compiler.target>
         <dockerfile.skip>false</dockerfile.skip>
-        <docker.image>run</docker.image>
+        <docker.image>core-${version}</docker.image>
         <docker.repo.user>gitbeaver</docker.repo.user>
         <main.class>org.jkube.gitbeaver.Main</main.class>
     </properties>

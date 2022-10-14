@@ -12,6 +12,11 @@ public class ScriptExecutor {
 
     private final CommandParser commandParser;
 
+    private String currentLine;
+    private String previousLine;
+    private String currentSubstitutedLine;
+    private String previousSubstitutedLine;
+
     public ScriptExecutor(CommandParser commandParser) {
         this.commandParser = commandParser;
     }
@@ -28,10 +33,22 @@ public class ScriptExecutor {
 
     private void executeLine(String line, Map<String, String> variables, WorkSpace workSpace) {
         List<String> arguments = new ArrayList<>();
+        previousLine = currentLine;
+        currentLine = line;
         String substituted = DefaultFileResolver.substituteVariables(line, variables);
+        previousSubstitutedLine = currentSubstitutedLine;
+        currentSubstitutedLine = substituted;
         Command command = commandParser.parseCommand(substituted, arguments);
         if (command != null) {
             command.execute(variables, workSpace, arguments);
         }
+    }
+
+    public String getPreviousLine() {
+        return previousLine;
+    }
+
+    public String getPreviousSubstitutedLine() {
+        return previousSubstitutedLine;
     }
 }

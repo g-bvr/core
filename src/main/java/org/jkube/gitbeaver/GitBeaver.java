@@ -1,6 +1,6 @@
 package org.jkube.gitbeaver;
 
-import org.jkube.gitbeaver.githandler.GitCloner;
+import org.jkube.gitbeaver.external.GitCloner;
 import org.jkube.gitbeaver.interfaces.FileResolver;
 import org.jkube.gitbeaver.interfaces.LogListener;
 import org.jkube.gitbeaver.plugin.PluginManager;

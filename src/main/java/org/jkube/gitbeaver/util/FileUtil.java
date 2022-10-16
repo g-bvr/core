@@ -82,14 +82,18 @@ public class FileUtil {
                 expectEqualTrees(path1.resolve(files1[i]), path2.resolve(files2[i]));
             }
         } else {
-            List<String> lines1 = onException(()-> Files.readAllLines(path1)).fail("Could not load file "+path1);
-            List<String> lines2 = onException(()-> Files.readAllLines(path2)).fail("Could not load file "+path2);
+            List<String> lines1 = readLines(path1);
+            List<String> lines2 = readLines(path2);
             Expect.equal(lines1.size(), lines2.size()).elseFail("Mismatching number of lines: "+path1+" ("+lines1.size()+") vs. "+path2+" ("+lines2.size()+")");
             for (int i = 0; i < lines1.size(); i++) {
                 Expect.equal(lines1.get(i), lines2.get(i)).elseFail("Mismatching line #" + i +
                         " in file "+path1+ " vs. " + path2+": \n"+lines1.get(i)+"\n"+lines2.get(i));
             }
         }
+    }
+
+    public static List<String> readLines(Path path) {
+        return onException(() -> Files.readAllLines(path)).fail("Could not load lines of "+path);
     }
 
 }

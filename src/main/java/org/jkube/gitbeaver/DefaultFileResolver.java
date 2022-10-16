@@ -1,6 +1,7 @@
 package org.jkube.gitbeaver;
 
 import org.jkube.gitbeaver.interfaces.FileResolver;
+import org.jkube.gitbeaver.util.FileUtil;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,7 +18,7 @@ public class DefaultFileResolver implements FileResolver {
 
     @Override
     public List<String> resolve(Path workspacePath, Path filePath, Map<String, String> variables) {
-        return onException(() -> Files.readAllLines(filePath)).fail("Could not load lines of file: "+filePath);
+        return FileUtil.readLines(filePath);
     }
 
     public static String substituteVariables(final String line, Map<String, String> variables) {

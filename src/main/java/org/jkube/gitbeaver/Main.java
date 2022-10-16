@@ -6,13 +6,16 @@ import org.jkube.logging.Log;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static org.jkube.logging.Log.log;
+
 public class Main {
     public static void main(String[] args) {
         Application.setFailureHandler((message, code) -> {
             Log.error("Critical failure: {}, terminating VM with exit code {}", message, code);
             System.exit(code);
         });
-        Log.log("Running gitresolver v0.0");
+        Log.log("Running gitresolver ", Main.class.getPackage().getImplementationVersion());
+        GitBeaver.pluginManager().enableAllAvailablePlugins();
         GitBeaver.run(parseArgs(args));
         Log.log("Done.");
     }

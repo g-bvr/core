@@ -1,14 +1,10 @@
 package org.jkube.gitbeaver.plugin;
 
-import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.logging.Log;
-import org.jkube.util.Expect;
 
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 import java.io.IOException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;

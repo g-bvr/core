@@ -1,6 +1,6 @@
 package org.jkube.gitbeaver;
 
-import org.jkube.gitbeaver.githandler.GitCloner;
+import org.jkube.gitbeaver.external.GitCloner;
 import org.jkube.gitbeaver.util.FileUtil;
 import org.jkube.gitbeaver.util.test.TestUtil;
 import org.junit.jupiter.api.Assertions;

@@ -1,7 +1,6 @@
 package org.jkube.gitbeaver.command;
 
 import org.jkube.gitbeaver.util.Environment;
-import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.SimpleCommand;
 import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.plugin.PluginCompiler;

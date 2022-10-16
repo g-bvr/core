@@ -1,4 +1,4 @@
-package org.jkube.gitbeaver.githandler;
+package org.jkube.gitbeaver.external;
 
 import org.jkube.gitbeaver.DefaultLogConsole;
 import org.jkube.gitbeaver.util.ExternalProcess;

@@ -2,32 +2,31 @@ package org.jkube.gitbeaver.plugin;
 
 import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.interfaces.Plugin;
-import org.jkube.gitbeaver.util.Environment;
+import org.jkube.gitbeaver.util.FileUtil;
 import org.jkube.logging.Log;
 import org.jkube.util.Expect;
 
-import java.net.URL;
-import java.net.URLClassLoader;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
-import static org.jkube.logging.Log.exception;
 import static org.jkube.logging.Log.onException;
 
 public class PluginManager {
 
+    private static final Path PLUGIN_LIST = Path.of("/plugins.txt");
     static boolean pluginsFrozen = false;
 
-    private final ClassLoader classLoader = createClassLoader();
+    private final Map<String, Plugin> plugins = new LinkedHashMap<>();
 
-    private final List<Plugin> plugins = new ArrayList<>();
-
-    public void shutdown() {
-        plugins.forEach(Plugin::shutdown);
+    public Plugin getPlugin(String className) {
+        return plugins.get(className);
     }
 
-    public List<Plugin> getPlugins() {
-        return plugins;
+    public void shutdown() {
+        plugins.values().forEach(Plugin::shutdown);
     }
 
     public static boolean checkPluginsNotFrozen() {
@@ -39,23 +38,37 @@ public class PluginManager {
         pluginsFrozen = true;
     }
 
-    public ClassLoader createClassLoader() {
-        URL url = onException(() -> Environment.classPath().toFile().toURI().toURL())
-                .fail("Could not convert to URL: "+Environment.classPath());
-        Log.log("Using URLClassloader: "+url);
-        return URLClassLoader.newInstance(new URL[] { url });
-    }
-
-    public void enable(String pluginClass) {
+    public boolean enable(String pluginClass) {
         if (checkPluginsNotFrozen()) {
             Class<?> cls = onException(() -> Class.forName(pluginClass, true, getClass().getClassLoader()))
                     .fail("Could not load class: " + pluginClass);
             Plugin plugin = onException(() -> (Plugin) cls.getConstructor().newInstance())
                     .fail("Could not instantiatxe class: " + pluginClass);
-            plugins.add(plugin);
+            Expect.isNull(plugins.put(pluginClass, plugin))
+                    .elseFail("Pluginclass specified twice: "+pluginClass);
             plugin.init();
             GitBeaver.commandParser().addCommands(plugin.getCommands());
+            return true;
         }
+        return false;
+    }
+
+    public void enableAllAvailablePlugins() {
+        StringBuilder sb = new StringBuilder();
+        if (PLUGIN_LIST.toFile().exists()) {
+            sb.append("Available plugins:");
+            FileUtil.readLines(PLUGIN_LIST).forEach(line -> sb.append("\n").append(activatePluginMessage(line)));
+            Log.log(sb.toString());
+        } else {
+            Log.log("No plugins list found at: "+PLUGIN_LIST);
+        }
+    }
+
+    private String activatePluginMessage(String line) {
+        String[] split = line.split(" ");
+        Expect.equal(2, split.length).elseFail("Illegal plugin list format: "+line);
+        boolean success = GitBeaver.pluginManager().enable(split[1]);
+        return split[0] + " --> "+(success ? "OK" : "FAILED");
     }
 
 }

@@ -1,12 +1,12 @@
 package org.jkube.gitbeaver;
 
 import org.jkube.gitbeaver.interfaces.Command;
-import org.jkube.gitbeaver.interfaces.Plugin;
+import org.jkube.gitbeaver.plugin.SimplePlugin;
 import org.jkube.logging.Log;
 
 import java.util.List;
 
-public class TestPlugin implements Plugin {
+public class TestPlugin extends SimplePlugin {
     @Override
     public List<Command> getCommands() {
         return List.of(new TestCommand());

@@ -44,8 +44,10 @@ public class PluginManager {
                     .fail("Could not load class: " + pluginClass);
             Plugin plugin = onException(() -> (Plugin) cls.getConstructor().newInstance())
                     .fail("Could not instantiatxe class: " + pluginClass);
-            Expect.isNull(plugins.put(pluginClass, plugin))
-                    .elseFail("Pluginclass specified twice: "+pluginClass);
+            if (plugins.containsKey(pluginClass)) {
+                return false;
+            }
+            plugins.put(pluginClass, plugin);
             plugin.init();
             GitBeaver.commandParser().addCommands(plugin.getCommands());
             return true;

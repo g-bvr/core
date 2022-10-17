@@ -41,7 +41,7 @@ public class PluginManager {
         }
         pluginsFrozen = true;
         Log.log("Plugins are now frozen");
-        if (writeFreezeMarker) {
+        if (writeFreezeMarker && PLUGIN_LIST.toFile().exists()) {
             FileUtil.append(FREEZE_MARKER, PLUGIN_LIST.toFile());
         }
     }

@@ -1,6 +1,7 @@
 package org.jkube.gitbeaver.plugin;
 
 import org.jkube.gitbeaver.GitBeaver;
+import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.interfaces.Plugin;
 import org.jkube.gitbeaver.util.FileUtil;
 import org.jkube.logging.Log;
@@ -35,15 +36,12 @@ public class PluginManager {
         return !pluginsFrozen;
     }
 
-    public static void setPluginsFrozen(boolean writeFreezeMarker) {
+    public static void setPluginsFrozen() {
         if (pluginsFrozen) {
             return;
         }
         pluginsFrozen = true;
         Log.log("Plugins are now frozen");
-        if (writeFreezeMarker && PLUGIN_LIST.toFile().exists()) {
-            FileUtil.append(FREEZE_MARKER, PLUGIN_LIST.toFile());
-        }
     }
 
     public boolean enable(String pluginClass) {
@@ -76,7 +74,7 @@ public class PluginManager {
 
     private String activatePluginMessage(String line) {
         if (line.equals(FREEZE_MARKER)) {
-            PluginManager.setPluginsFrozen(false);
+            PluginManager.setPluginsFrozen();
         }
         String[] split = line.split(" ");
         Expect.equal(2, split.length).elseFail("Illegal plugin list format: "+line);

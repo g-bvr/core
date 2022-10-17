@@ -30,7 +30,7 @@ public class DefaultLogConsole implements LogConsole {
     }
 
     @Override
-    public void add(String message) {
+    public void log(String message) {
         Log.log(message);
     }
 }

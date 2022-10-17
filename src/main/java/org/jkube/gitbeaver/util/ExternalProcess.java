@@ -163,7 +163,7 @@ public class ExternalProcess {
 			errors.add(line);
 			log("ERROR> "+line);
 		} else {
-			console.add(line);	
+			console.log(line);
 			output.add(line);
 			log("OUTPUT> "+line);
 		}

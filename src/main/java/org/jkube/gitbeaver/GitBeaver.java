@@ -1,8 +1,9 @@
 package org.jkube.gitbeaver;
 
 import org.jkube.gitbeaver.external.GitCloner;
+import org.jkube.gitbeaver.interfaces.ApplicationLogger;
+import org.jkube.gitbeaver.interfaces.ApplicationLoggerFactory;
 import org.jkube.gitbeaver.interfaces.FileResolver;
-import org.jkube.gitbeaver.interfaces.LogListener;
 import org.jkube.gitbeaver.plugin.PluginManager;
 import org.jkube.logging.Log;
 
@@ -18,6 +19,7 @@ public class GitBeaver {
     private static final String WORKDIR_DEFAULT = "workdir";
 
     private static final GitBeaver SINGLETON = new GitBeaver();
+    private static final String MAIN_RUN = "main";
 
     public static GitCloner gitCloner() {
         return SINGLETON.gitCloner;
@@ -31,9 +33,14 @@ public class GitBeaver {
         return SINGLETON.pluginManager;
     }
 
-    public static List<LogListener> logListeners() {
-        return SINGLETON.logListeners;
+    public static List<ApplicationLoggerFactory> applicationLoggerFactories() {
+        return SINGLETON.loggerFactories;
     }
+
+    public static List<ApplicationLogger> activeApplicationLoggers() {
+        return SINGLETON.activeLoggers;
+    }
+
 
     public static FileResolver fileResolver() {
         return SINGLETON.fileResolver;
@@ -56,7 +63,8 @@ public class GitBeaver {
 
     private final PluginManager pluginManager = new PluginManager();
 
-    private final List<LogListener> logListeners = new ArrayList<>();
+    private final List<ApplicationLoggerFactory> loggerFactories = new ArrayList<>();
+    private final List<ApplicationLogger> activeLoggers = new ArrayList<>();
 
     private FileResolver fileResolver = new DefaultFileResolver();
 
@@ -64,6 +72,11 @@ public class GitBeaver {
         Log.log("Initial variables: "+variables);
         String script = variables.getOrDefault(MAIN_VARIABLE, MAIN_DEFAULT);
         String workspace = variables.getOrDefault(WORKDIR_VARIABLE, WORKDIR_DEFAULT);
+        if (loggerFactories.isEmpty()) {
+            Log.log("No logger factories available, falling back to DefaultLogger");
+            loggerFactories.add(DefaultLogger::new);
+        }
+        loggerFactories.forEach(lf -> activeLoggers.add(lf.createLogger(MAIN_RUN)));
         scriptExecutor.execute(script, null, variables, new WorkSpace(workspace));
     }
 

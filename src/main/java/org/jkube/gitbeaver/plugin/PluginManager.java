@@ -17,6 +17,7 @@ import static org.jkube.logging.Log.onException;
 public class PluginManager {
 
     private static final Path PLUGIN_LIST = Path.of("/plugins.txt");
+    private static final String FREEZE_MARKER = "[FREEZE]";
     static boolean pluginsFrozen = false;
 
     private final Map<String, Plugin> plugins = new LinkedHashMap<>();
@@ -34,8 +35,15 @@ public class PluginManager {
         return !pluginsFrozen;
     }
 
-    public static void setPluginsFrozen() {
+    public static void setPluginsFrozen(boolean writeFreezeMarker) {
+        if (pluginsFrozen) {
+            return;
+        }
         pluginsFrozen = true;
+        Log.log("Plugins are now frozen");
+        if (writeFreezeMarker) {
+            FileUtil.append(FREEZE_MARKER, PLUGIN_LIST.toFile());
+        }
     }
 
     public boolean enable(String pluginClass) {
@@ -67,6 +75,9 @@ public class PluginManager {
     }
 
     private String activatePluginMessage(String line) {
+        if (line.equals(FREEZE_MARKER)) {
+            PluginManager.setPluginsFrozen(false);
+        }
         String[] split = line.split(" ");
         Expect.equal(2, split.length).elseFail("Illegal plugin list format: "+line);
         boolean success = GitBeaver.pluginManager().enable(split[1]);

@@ -5,7 +5,9 @@ import org.jkube.logging.Log;
 import org.jkube.util.Expect;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -94,6 +96,13 @@ public class FileUtil {
 
     public static List<String> readLines(Path path) {
         return onException(() -> Files.readAllLines(path)).fail("Could not load lines of "+path);
+    }
+    public static void append(String line, File file) {
+        try (PrintWriter output = new PrintWriter(new FileWriter(file, true))) {
+            output.println(line);
+        } catch (IOException e) {
+            Application.fail("could not append to file "+ file);
+        }
     }
 
 }

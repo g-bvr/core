@@ -19,8 +19,7 @@ public class PluginsFreezeCommand extends SimpleCommand {
 
     @Override
     protected void execute(WorkSpace workSpace, List<String> arguments) {
-        PluginManager.setPluginsFrozen();
-        Log.log("Plugins are now frozen");
+        PluginManager.setPluginsFrozen(true);
     }
 
 }

@@ -14,7 +14,7 @@ public class Main {
             Log.error("Critical failure: {}, terminating VM with exit code {}", message, code);
             System.exit(code);
         });
-        Log.log("Running gitresolver ", Main.class.getPackage().getImplementationVersion());
+        Log.log("Running gitresolver {}", Main.class.getPackage().getImplementationVersion());
         GitBeaver.pluginManager().enableAllAvailablePlugins();
         GitBeaver.run(parseArgs(args));
         Log.log("Done.");

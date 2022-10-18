@@ -75,7 +75,7 @@ public class PluginManager {
     private String activatePluginMessage(String line) {
         if (line.equals(FREEZE_MARKER)) {
             PluginManager.setPluginsFrozen();
-            return "";
+            return "plugins frozen";
         }
         String[] split = line.split(" ");
         Expect.equal(2, split.length).elseFail("Illegal plugin list format: "+line);

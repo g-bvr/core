@@ -16,7 +16,7 @@ public class DefaultLogger implements ApplicationLogger,LogConsole {
 
     List<String> logLines = new ArrayList<>();
     public DefaultLogger(String runIdentifier) {
-        Log.log("Creating default logger for tun id: "+runIdentifier);
+        Log.log("Creating default logger for run id: "+runIdentifier);
     }
 
     @Override

@@ -3,6 +3,7 @@ package org.jkube.gitbeaver;
 import org.jkube.application.Application;
 import org.jkube.gitbeaver.command.*;
 import org.jkube.gitbeaver.interfaces.Command;
+import org.jkube.gitbeaver.plugin.SimplePlugin;
 import org.jkube.util.Expect;
 
 import java.util.*;
@@ -13,13 +14,15 @@ public class CommandParser {
     private final List<Command> commands = new ArrayList<>();
 
     public CommandParser() {
-        addCommands(List.of(
-                new LogCommand(),
-                new GitCloneCommand(),
-                new PluginCompileCommand(),
-                new PluginEnableCommand(),
-                new PluginsFreezeCommand()
-        ));
+        addCommands(new SimplePlugin(
+                LogCommand.class,
+                WarnCommand.class,
+                ErrorCommand.class,
+                GitCloneCommand.class,
+                PluginCompileCommand.class,
+                PluginEnableCommand.class,
+                PluginsFreezeCommand.class
+        ).getCommands());
     }
 
     public void addCommands(Collection<Command> commands) {

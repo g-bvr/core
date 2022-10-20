@@ -1,25 +1,24 @@
 package org.jkube.gitbeaver;
 
 import org.jkube.gitbeaver.external.GitCloner;
-import org.jkube.gitbeaver.interfaces.ApplicationLogger;
-import org.jkube.gitbeaver.interfaces.ApplicationLoggerFactory;
 import org.jkube.gitbeaver.interfaces.FileResolver;
 import org.jkube.gitbeaver.plugin.PluginManager;
 import org.jkube.logging.Log;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class GitBeaver {
-    private static final String MAIN_VARIABLE = "main";
     public static final String BEAVER_EXTENSION = ".bvr";
+    private static final String MAIN_VARIABLE = "main";
     private static final String MAIN_DEFAULT = "main" + BEAVER_EXTENSION;
+    public static final String RUN_ID_VARIABLE = "run";
+
+    private static final String RUN_ID_DEFAULT = "init";
+
     private static final String WORKDIR_VARIABLE = "workdir";
     private static final String WORKDIR_DEFAULT = "workdir";
 
     private static final GitBeaver SINGLETON = new GitBeaver();
-    private static final String MAIN_RUN = "main";
 
     public static GitCloner gitCloner() {
         return SINGLETON.gitCloner;
@@ -33,21 +32,16 @@ public class GitBeaver {
         return SINGLETON.pluginManager;
     }
 
-    public static List<ApplicationLoggerFactory> applicationLoggerFactories() {
-        return SINGLETON.loggerFactories;
-    }
-
-    public static List<ApplicationLogger> activeApplicationLoggers() {
-        return SINGLETON.activeLoggers;
-    }
-
-
     public static FileResolver fileResolver() {
         return SINGLETON.fileResolver;
     }
 
     public static ScriptExecutor scriptExecutor() {
         return SINGLETON.scriptExecutor;
+    }
+
+    public static ApplicationLogHandler applicationLogHandler() {
+        return SINGLETON.applicationLogHandler;
     }
 
     public static void setFileResolver(FileResolver fileResolver) {
@@ -63,21 +57,22 @@ public class GitBeaver {
 
     private final PluginManager pluginManager = new PluginManager();
 
-    private final List<ApplicationLoggerFactory> loggerFactories = new ArrayList<>();
-    private final List<ApplicationLogger> activeLoggers = new ArrayList<>();
-
     private FileResolver fileResolver = new DefaultFileResolver();
 
+    private final ApplicationLogHandler applicationLogHandler = new ApplicationLogHandler();
+
     private void runMain(Map<String, String> variables) {
+        String script = withDefault(variables, MAIN_VARIABLE, MAIN_DEFAULT);
+        String workspace = withDefault(variables, WORKDIR_VARIABLE, WORKDIR_DEFAULT);
+        String runId = withDefault(variables, RUN_ID_VARIABLE, RUN_ID_DEFAULT);
+        applicationLogHandler.createRun(runId);
         Log.log("Initial variables: "+variables);
-        String script = variables.getOrDefault(MAIN_VARIABLE, MAIN_DEFAULT);
-        String workspace = variables.getOrDefault(WORKDIR_VARIABLE, WORKDIR_DEFAULT);
-        if (loggerFactories.isEmpty()) {
-            Log.log("No logger factories available, falling back to DefaultLogger");
-            loggerFactories.add(DefaultLogger::new);
-        }
-        loggerFactories.forEach(lf -> activeLoggers.add(lf.createLogger(MAIN_RUN)));
         scriptExecutor.execute(script, null, variables, new WorkSpace(workspace));
+    }
+
+    private String withDefault(Map<String, String> variables, String key, String defaultValue) {
+        variables.putIfAbsent(key, defaultValue);
+        return variables.get(key);
     }
 
 }

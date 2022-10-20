@@ -1,9 +1,9 @@
 package org.jkube.gitbeaver.interfaces;
 
-public interface Logger {
+public interface SimpleLogger {
     void log(String line);
 
-    void warn(String runtimeMessage);
+    void warn(String line);
 
     void error(String line);
 }

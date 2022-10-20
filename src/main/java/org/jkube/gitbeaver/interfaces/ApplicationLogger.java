@@ -2,7 +2,7 @@ package org.jkube.gitbeaver.interfaces;
 
 import java.util.List;
 
-public interface ApplicationLogger extends Logger {
+public interface ApplicationLogger extends SimpleLogger {
 
     LogConsole createSubConsole();
 

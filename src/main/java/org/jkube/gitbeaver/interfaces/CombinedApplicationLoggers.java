@@ -57,6 +57,7 @@ public class CombinedApplicationLoggers implements ApplicationLogger {
 
     public List<String> getCollectedLogs(String applicationLoggerClassName) {
         for (ApplicationLogger al : applicationLoggers) {
+            Log.log("Logger class: {}", al.getClass().getName());
             if (al.getClass().getName().equals(applicationLoggerClassName)) {
                 return al.getCollectedLogs();
             }

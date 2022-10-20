@@ -22,6 +22,7 @@ public class ApplicationLogHandler {
 
     public void addLogFactory(ApplicationLoggerFactory factory) {
         loggerFactories.add(factory);
+        logger4Run.forEach((name,cal) -> cal.add(factory.createLogger(name)));
     }
 
     public void createRun(String runId) {

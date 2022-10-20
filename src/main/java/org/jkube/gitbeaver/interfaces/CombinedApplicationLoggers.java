@@ -66,4 +66,7 @@ public class CombinedApplicationLoggers implements ApplicationLogger {
         return null;
     }
 
+    public void add(ApplicationLogger logger) {
+        applicationLoggers.add(logger);
+    }
 }

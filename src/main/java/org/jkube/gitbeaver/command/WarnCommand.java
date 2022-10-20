@@ -18,8 +18,7 @@ public class WarnCommand extends AbstractCommand {
 
     @Override
     public void execute(Map<String, String> variables, WorkSpace workSpace, List<String> arguments) {
-        GitBeaver.applicationLogHandler().getLoggerForRun(variables.get(GitBeaver.RUN_ID_VARIABLE))
-                .warn(String.join(" ", arguments));
+        GitBeaver.getApplicationLogger(variables).warn(String.join(" ", arguments));
     }
 
 }

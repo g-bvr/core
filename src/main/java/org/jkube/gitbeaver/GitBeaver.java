@@ -1,6 +1,7 @@
 package org.jkube.gitbeaver;
 
 import org.jkube.gitbeaver.external.GitCloner;
+import org.jkube.gitbeaver.interfaces.ApplicationLogger;
 import org.jkube.gitbeaver.interfaces.FileResolver;
 import org.jkube.gitbeaver.plugin.PluginManager;
 import org.jkube.logging.Log;
@@ -44,6 +45,9 @@ public class GitBeaver {
         return SINGLETON.applicationLogHandler;
     }
 
+    public static ApplicationLogger getApplicationLogger(Map<String, String> variables) {
+        return SINGLETON.applicationLogHandler.getLoggerForRun(variables.get(GitBeaver.RUN_ID_VARIABLE));
+    }
     public static void setFileResolver(FileResolver fileResolver) {
         SINGLETON.fileResolver = fileResolver;
     }

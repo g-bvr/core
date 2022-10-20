@@ -23,8 +23,7 @@ public class LogCommand extends AbstractCommand {
 
     @Override
     public void execute(Map<String, String> variables, WorkSpace workSpace, List<String> arguments) {
-        GitBeaver.applicationLogHandler().getLoggerForRun(variables.get(GitBeaver.RUN_ID_VARIABLE))
-                .log(String.join(" ", arguments));
+        GitBeaver.getApplicationLogger(variables).log(String.join(" ", arguments));
     }
 
 }

@@ -18,8 +18,7 @@ public class ErrorCommand extends AbstractCommand {
 
     @Override
     public void execute(Map<String, String> variables, WorkSpace workSpace, List<String> arguments) {
-        GitBeaver.applicationLogHandler().getLoggerForRun(variables.get(GitBeaver.RUN_ID_VARIABLE))
-                .error(String.join(" ", arguments));
+        GitBeaver.getApplicationLogger(variables).error(String.join(" ", arguments));
     }
 
 }

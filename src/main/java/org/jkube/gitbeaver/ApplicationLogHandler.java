@@ -3,6 +3,7 @@ package org.jkube.gitbeaver;
 import org.jkube.gitbeaver.interfaces.ApplicationLogger;
 import org.jkube.gitbeaver.interfaces.ApplicationLoggerFactory;
 import org.jkube.gitbeaver.interfaces.CombinedApplicationLoggers;
+import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.util.Expect;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 public class ApplicationLogHandler {
 
     private final List<ApplicationLoggerFactory> loggerFactories = new ArrayList<>();
-    private final Map<String, ApplicationLogger> logger4Run = new LinkedHashMap<>();
+    private final Map<String, CombinedApplicationLoggers> logger4Run = new LinkedHashMap<>();
     public ApplicationLogHandler() {
         addLogFactory(DefaultLogger::new);
     }
@@ -31,8 +32,8 @@ public class ApplicationLogHandler {
         return loggerFactories.stream().map(alf -> alf.createLogger(runId)).collect(Collectors.toList());
     }
 
-    public ApplicationLogger getLoggerForRun(String runId) {
-        ApplicationLogger res = logger4Run.get(runId);
+    public CombinedApplicationLoggers getLoggerForRun(String runId) {
+        CombinedApplicationLoggers res = logger4Run.get(runId);
         Expect.notNull(res).elseFail("Did not find logger for run: "+runId);
         return res;
     }

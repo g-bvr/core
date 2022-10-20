@@ -105,4 +105,7 @@ public class FileUtil {
         }
     }
 
+    public static void store(Path path, List<String> lines) {
+        onException(() -> Files.write(path, lines)).fail("Could not write lines to file: "+path);
+    }
 }

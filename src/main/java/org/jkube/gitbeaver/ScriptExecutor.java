@@ -1,7 +1,7 @@
 package org.jkube.gitbeaver;
 
 import org.jkube.gitbeaver.interfaces.Command;
-import org.jkube.gitbeaver.util.VariableResolver;
+import org.jkube.gitbeaver.util.VariableSubstitution;
 import org.jkube.logging.Log;
 import org.jkube.util.Expect;
 
@@ -37,7 +37,7 @@ public class ScriptExecutor {
         List<String> arguments = new ArrayList<>();
         previousLine = currentLine;
         currentLine = line;
-        String substituted = VariableResolver.substituteVariables(line, variables);
+        String substituted = VariableSubstitution.substituteVariables(line, variables);
         previousSubstitutedLine = currentSubstitutedLine;
         currentSubstitutedLine = substituted;
         Command command = commandParser.parseCommand(substituted, arguments);

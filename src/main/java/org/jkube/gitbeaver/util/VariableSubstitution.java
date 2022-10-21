@@ -1,12 +1,10 @@
 package org.jkube.gitbeaver.util;
 
-import org.jkube.gitbeaver.DefaultFileResolver;
-
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class VariableResolver {
+public class VariableSubstitution {
 
     public static final Pattern VAR_EXPRESSION = Pattern.compile(".*\\$\\{([a-zA-Z0-9_-]+)\\}.*");
 

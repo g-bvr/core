@@ -1,9 +1,7 @@
-package org.jkube.gitbeaver;
+package org.jkube.gitbeaver.applicationlog;
 
 import org.jkube.gitbeaver.interfaces.ApplicationLogger;
 import org.jkube.gitbeaver.interfaces.ApplicationLoggerFactory;
-import org.jkube.gitbeaver.interfaces.CombinedApplicationLoggers;
-import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.util.Expect;
 
 import java.util.ArrayList;

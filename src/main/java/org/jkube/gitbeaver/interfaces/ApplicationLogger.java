@@ -1,6 +1,6 @@
 package org.jkube.gitbeaver.interfaces;
 
-import java.util.List;
+import org.jkube.gitbeaver.applicationlog.StepState;
 
 public interface ApplicationLogger extends SimpleLogger {
 
@@ -12,5 +12,5 @@ public interface ApplicationLogger extends SimpleLogger {
 
     void closeStep();
 
-    List<String> getCollectedLogs();
+    String getCollectedLogs();
 }

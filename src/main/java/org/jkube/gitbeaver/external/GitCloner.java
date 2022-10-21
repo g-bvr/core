@@ -1,6 +1,6 @@
 package org.jkube.gitbeaver.external;
 
-import org.jkube.gitbeaver.DefaultLogConsole;
+import org.jkube.gitbeaver.applicationlog.DefaultLogConsole;
 import org.jkube.gitbeaver.util.ExternalProcess;
 import org.jkube.gitbeaver.util.FileUtil;
 

@@ -1,4 +1,4 @@
-package org.jkube.gitbeaver;
+package org.jkube.gitbeaver.applicationlog;
 
 import org.jkube.gitbeaver.interfaces.LogConsole;
 import org.jkube.logging.Log;

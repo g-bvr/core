@@ -1,7 +1,7 @@
-package org.jkube.gitbeaver.interfaces;
+package org.jkube.gitbeaver.applicationlog;
 
 public enum StepState {
-    DIDNOTHING, DIDSOMETHING, SUCCESS, WARNING, ERROR;
+    RUNNING, DIDNOTHING, DIDSOMETHING, SUCCESS, WARNING, ERROR;
 
     public StepState combine(StepState other) {
         return compareTo(other) > 0 ? this : other;

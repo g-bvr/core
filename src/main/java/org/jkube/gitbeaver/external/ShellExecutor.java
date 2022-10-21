@@ -1,11 +1,7 @@
 package org.jkube.gitbeaver.external;
 
-import org.jkube.gitbeaver.DefaultLogConsole;
+import org.jkube.gitbeaver.applicationlog.DefaultLogConsole;
 import org.jkube.gitbeaver.util.ExternalProcess;
-import org.jkube.gitbeaver.util.FileUtil;
-
-import java.net.URL;
-import java.nio.file.Path;
 
 public class ShellExecutor {
 

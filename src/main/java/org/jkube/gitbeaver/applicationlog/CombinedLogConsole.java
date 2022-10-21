@@ -1,4 +1,6 @@
-package org.jkube.gitbeaver.interfaces;
+package org.jkube.gitbeaver.applicationlog;
+
+import org.jkube.gitbeaver.interfaces.LogConsole;
 
 import java.util.ArrayList;
 import java.util.List;

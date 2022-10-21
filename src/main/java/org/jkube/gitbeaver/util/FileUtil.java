@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -107,5 +108,9 @@ public class FileUtil {
 
     public static void store(Path path, List<String> lines) {
         onException(() -> Files.write(path, lines)).fail("Could not write lines to file: "+path);
+    }
+
+    public static void store(Path path, String text) {
+        store(path, Collections.singletonList(text));
     }
 }

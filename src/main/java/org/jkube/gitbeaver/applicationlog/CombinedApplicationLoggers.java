@@ -1,9 +1,10 @@
-package org.jkube.gitbeaver.interfaces;
+package org.jkube.gitbeaver.applicationlog;
 
+import org.jkube.gitbeaver.interfaces.ApplicationLogger;
+import org.jkube.gitbeaver.interfaces.LogConsole;
 import org.jkube.logging.Log;
 import org.jkube.util.Expect;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CombinedApplicationLoggers implements ApplicationLogger {
@@ -50,12 +51,12 @@ public class CombinedApplicationLoggers implements ApplicationLogger {
     }
 
     @Override
-    public List<String> getCollectedLogs() {
+    public String getCollectedLogs() {
         Expect.size(applicationLoggers, 1).elseFail("Could not get combined logs for multiple loggers");
         return applicationLoggers.get(0).getCollectedLogs();
     }
 
-    public List<String> getCollectedLogs(String applicationLoggerClassName) {
+    public String getCollectedLogs(String applicationLoggerClassName) {
         for (ApplicationLogger al : applicationLoggers) {
             Log.log("Logger class: {}", al.getClass().getName());
             if (al.getClass().getName().equals(applicationLoggerClassName)) {

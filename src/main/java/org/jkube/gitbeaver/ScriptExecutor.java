@@ -1,6 +1,7 @@
 package org.jkube.gitbeaver;
 
 import org.jkube.gitbeaver.interfaces.Command;
+import org.jkube.gitbeaver.util.VariableResolver;
 import org.jkube.logging.Log;
 import org.jkube.util.Expect;
 
@@ -26,7 +27,8 @@ public class ScriptExecutor {
         List<String> scriptLines = GitBeaver.fileResolver().resolve(
                 workSpace.getWorkdir(),
                 workSpace.getAbsolutePath(script),
-                variables);
+                variables,
+                false);
         Expect.notNull(scriptLines).elseFail("Script file does not exist: "+script);
         scriptLines.forEach(line -> executeLine(line, variables, workSpace));
     }
@@ -35,7 +37,7 @@ public class ScriptExecutor {
         List<String> arguments = new ArrayList<>();
         previousLine = currentLine;
         currentLine = line;
-        String substituted = DefaultFileResolver.substituteVariables(line, variables);
+        String substituted = VariableResolver.substituteVariables(line, variables);
         previousSubstitutedLine = currentSubstitutedLine;
         currentSubstitutedLine = substituted;
         Command command = commandParser.parseCommand(substituted, arguments);

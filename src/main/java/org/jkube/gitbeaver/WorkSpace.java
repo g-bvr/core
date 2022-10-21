@@ -11,7 +11,11 @@ public class WorkSpace {
     private final Path workdir;
 
     public WorkSpace(String workdir) {
-        this.workdir = onException(() -> Path.of(workdir).toRealPath()).fail("could not get real path: "+workdir);
+        this(Path.of(workdir));
+    }
+
+    public WorkSpace(Path workdirPath) {
+        this.workdir = onException(() -> workdirPath.toRealPath()).fail("could not get real path: "+workdirPath);
     }
 
     public Path getWorkdir() {
@@ -36,5 +40,9 @@ public class WorkSpace {
                 .elseFail("Path is outside workspace: "+realPath);
         return workdir.relativize(absolutePath);
 
+    }
+
+    public WorkSpace getSubWorkspace(String relativePath) {
+        return new WorkSpace(getAbsolutePath(relativePath));
     }
 }

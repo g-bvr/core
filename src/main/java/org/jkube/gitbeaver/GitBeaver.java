@@ -70,8 +70,8 @@ public class GitBeaver {
         String script = withDefault(variables, MAIN_VARIABLE, MAIN_DEFAULT);
         String workspace = withDefault(variables, WORKDIR_VARIABLE, WORKDIR_DEFAULT);
         String runId = withDefault(variables, RUN_ID_VARIABLE, RUN_ID_DEFAULT);
-        applicationLogHandler.createRun(runId);
         Log.log("Initial variables: "+variables);
+        applicationLogHandler.createRun(runId);
         scriptExecutor.execute(script, null, variables, new WorkSpace(workspace));
     }
 

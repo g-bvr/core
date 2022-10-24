@@ -26,7 +26,7 @@ public class ScriptExecutor {
         Log.log("Executing script "+script+(forItem == null ? "" : " for "+forItem)+" in "+workSpace.getWorkdir());
         List<String> scriptLines = GitBeaver.fileResolver().resolve(
                 workSpace.getWorkdir(),
-                workSpace.getAbsolutePath(script),
+                workSpace.getAbsolutePath(script+GitBeaver.BEAVER_EXTENSION),
                 variables,
                 false);
         Expect.notNull(scriptLines).elseFail("Script file does not exist: "+script);

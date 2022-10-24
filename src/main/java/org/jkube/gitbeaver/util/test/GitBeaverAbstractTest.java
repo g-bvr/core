@@ -13,7 +13,7 @@ public class GitBeaverAbstractTest {
 
     public static final String WORKDIR = "workdir";
     public static final String MAIN = "main";
-    public static final String TEST_BVR = "test"+ GitBeaver.BEAVER_EXTENSION;
+    public static final String TEST_BVR = "test";
 
     public static final String OUTPUT = "output";
     public static final String EXPECTED = "expected";

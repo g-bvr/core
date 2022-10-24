@@ -12,7 +12,7 @@ import java.util.Map;
 public class GitBeaver {
     public static final String BEAVER_EXTENSION = ".bvr";
     private static final String MAIN_VARIABLE = "main";
-    private static final String MAIN_DEFAULT = "main" + BEAVER_EXTENSION;
+    private static final String MAIN_DEFAULT = "main";
     public static final String RUN_ID_VARIABLE = "run";
 
     private static final String RUN_ID_DEFAULT = "init";

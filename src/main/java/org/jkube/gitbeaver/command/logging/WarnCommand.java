@@ -1,4 +1,4 @@
-package org.jkube.gitbeaver.command;
+package org.jkube.gitbeaver.command.logging;
 
 import org.jkube.gitbeaver.AbstractCommand;
 import org.jkube.gitbeaver.GitBeaver;

@@ -2,6 +2,12 @@ package org.jkube.gitbeaver;
 
 import org.jkube.application.Application;
 import org.jkube.gitbeaver.command.*;
+import org.jkube.gitbeaver.command.logging.ErrorCommand;
+import org.jkube.gitbeaver.command.logging.LogCommand;
+import org.jkube.gitbeaver.command.logging.WarnCommand;
+import org.jkube.gitbeaver.command.plugin.PluginCompileCommand;
+import org.jkube.gitbeaver.command.plugin.PluginEnableCommand;
+import org.jkube.gitbeaver.command.plugin.PluginsFreezeCommand;
 import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.gitbeaver.plugin.SimplePlugin;
 import org.jkube.util.Expect;

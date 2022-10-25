@@ -1,4 +1,4 @@
-package org.jkube.gitbeaver.command;
+package org.jkube.gitbeaver.command.plugin;
 
 import org.jkube.gitbeaver.util.Environment;
 import org.jkube.gitbeaver.SimpleCommand;

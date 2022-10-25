@@ -23,14 +23,18 @@ public class ScriptExecutor {
     }
 
     public void execute(String script, String forItem, Map<String, String> variables, WorkSpace workSpace) {
-        Log.log("Executing script "+script+(forItem == null ? "" : " for "+forItem)+" in "+workSpace.getWorkdir());
+        execute(script, forItem, variables, workSpace, workSpace);
+    }
+
+    public void execute(String script, String forItem, Map<String, String> variables, WorkSpace scriptWorkSpace, WorkSpace executionWorkspace) {
+        Log.log("Executing script "+script+(forItem == null ? "" : " for "+forItem)+" in "+executionWorkspace.getWorkdir());
         List<String> scriptLines = GitBeaver.fileResolver().resolve(
-                workSpace.getWorkdir(),
-                workSpace.getAbsolutePath(script+GitBeaver.BEAVER_EXTENSION),
+                scriptWorkSpace.getWorkdir(),
+                scriptWorkSpace.getAbsolutePath(script+GitBeaver.BEAVER_EXTENSION),
                 variables,
                 false);
         Expect.notNull(scriptLines).elseFail("Script file does not exist: "+script);
-        scriptLines.forEach(line -> executeLine(line, variables, workSpace));
+        scriptLines.forEach(line -> executeLine(line, variables, executionWorkspace));
     }
 
     private void executeLine(String line, Map<String, String> variables, WorkSpace workSpace) {

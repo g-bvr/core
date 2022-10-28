@@ -37,4 +37,8 @@ public abstract class AbstractCommand implements Command {
         Expect.isTrue(expected.equalsIgnoreCase(arguments.get(pos))).elseFail("Expected '"+expected+"' at position "+pos+", got: "+arguments.get(pos));
     }
 
+    protected void expectNumArgs(int expected, List<String> arguments) {
+        Expect.equal(expected, arguments.size()).elseFail("Expected "+expected+" arguments, got "+arguments.size());
+    }
+
 }

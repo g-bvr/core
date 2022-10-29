@@ -7,7 +7,7 @@ public class ShellExecutor {
 
     public boolean execute(String command) {
         ExternalProcess process = new ExternalProcess()
-                .command(command)
+                .command(command.split(" "))
                 .logConsole(new DefaultLogConsole())
                 .execute();
         return process.hasFailed();

@@ -40,6 +40,17 @@ public class ExternalProcess {
 
 	private LogConsole logConsole;
 
+	public ExternalProcess command(List<String> command) {
+		return command(command.toArray(new String[0]));
+	}
+
+	public ExternalProcess command(String command, List<String> arguments) {
+		List<String> commandline = new ArrayList<>();
+		commandline.add(command);
+		commandline.addAll(arguments);
+		return command(commandline);
+	}
+
 	public ExternalProcess command(String... command) {
 		this.pb = new ProcessBuilder(command);
 		this.successMarker = null;

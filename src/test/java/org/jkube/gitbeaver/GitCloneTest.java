@@ -1,6 +1,8 @@
 package org.jkube.gitbeaver;
 
+import org.jkube.gitbeaver.applicationlog.DefaultLogger;
 import org.jkube.gitbeaver.external.GitCloner;
+import org.jkube.gitbeaver.interfaces.ApplicationLogger;
 import org.jkube.gitbeaver.util.FileUtil;
 import org.jkube.gitbeaver.util.test.TestUtil;
 import org.junit.jupiter.api.Assertions;
@@ -21,6 +23,8 @@ public class GitCloneTest {
     private static final String GIT_URL = "https://github.com/kneissler";
     private static final String REPOSITORY = "git-beaver-base";
 
+    private static final ApplicationLogger LOGGER = new DefaultLogger("test");
+
     @BeforeAll
     static void beforeTests() {
         TestUtil.beforeTests();
@@ -34,7 +38,7 @@ public class GitCloneTest {
     void simulateCloneTest() {
         GitCloner cloner = new GitCloner();
         cloner.doSimulatedCloning(Path.of(SRC_TEST_RESOURCES));
-        cloner.clone(Path.of(WORKDIR), null, PLUGIN, null);
+        cloner.clone(Path.of(WORKDIR), null, PLUGIN, null, LOGGER);
         TestUtil.assertNoFailures();
         Assertions.assertTrue(new File(WORKDIR+"/"+PLUGIN+"/org").exists());
         FileUtil.delete(Path.of(WORKDIR + "/" + PLUGIN));
@@ -43,7 +47,7 @@ public class GitCloneTest {
     @Test
     void realCloneTest() throws MalformedURLException {
         GitCloner cloner = new GitCloner();
-        cloner.clone(Path.of(WORKDIR), new URL(GIT_URL), REPOSITORY, null);
+        cloner.clone(Path.of(WORKDIR), new URL(GIT_URL), REPOSITORY, null, LOGGER);
         TestUtil.assertNoFailures();
         Assertions.assertTrue(new File(WORKDIR+"/"+REPOSITORY+"/pom.xml").exists());
         FileUtil.delete(Path.of(WORKDIR + "/" + REPOSITORY));
@@ -52,7 +56,7 @@ public class GitCloneTest {
     @Test
     void realCloneTagTest() throws MalformedURLException {
         GitCloner cloner = new GitCloner();
-        cloner.clone(Path.of(WORKDIR), new URL(GIT_URL), REPOSITORY, "main");
+        cloner.clone(Path.of(WORKDIR), new URL(GIT_URL), REPOSITORY, "main", LOGGER);
         TestUtil.assertNoFailures();
         Assertions.assertTrue(new File(WORKDIR+"/"+REPOSITORY+"/pom.xml").exists());
         FileUtil.delete(Path.of(WORKDIR + "/" + REPOSITORY));

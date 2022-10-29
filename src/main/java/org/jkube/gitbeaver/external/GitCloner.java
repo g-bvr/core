@@ -1,6 +1,8 @@
 package org.jkube.gitbeaver.external;
 
+import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.applicationlog.DefaultLogConsole;
+import org.jkube.gitbeaver.interfaces.ApplicationLogger;
 import org.jkube.gitbeaver.util.ExternalProcess;
 import org.jkube.gitbeaver.util.FileUtil;
 
@@ -15,7 +17,7 @@ public class GitCloner {
         simulateClonePath = repositoryPath;
     }
 
-    public void clone(Path workdir, URL gitUrl, String repository, String tag) {
+    public void clone(Path workdir, URL gitUrl, String repository, String tag, ApplicationLogger logger) {
         if (simulateClonePath != null) {
             Path sourcePath = createSimulatedGitPath(repository, tag);
             Path targetPath = workdir.resolve(repository);
@@ -32,6 +34,7 @@ public class GitCloner {
             clone
                 .dir(workdir)
                 .successMarker("Cloning into ")
+                    .logConsole(logger.createSubConsole())
                 .logConsole(new DefaultLogConsole())
                 .execute();
         }

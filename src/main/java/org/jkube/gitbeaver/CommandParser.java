@@ -7,6 +7,7 @@ import org.jkube.gitbeaver.command.logging.LogCommand;
 import org.jkube.gitbeaver.command.logging.WarnCommand;
 import org.jkube.gitbeaver.command.plugin.PluginCompileCommand;
 import org.jkube.gitbeaver.command.plugin.PluginEnableCommand;
+import org.jkube.gitbeaver.command.plugin.PluginInstallCommand;
 import org.jkube.gitbeaver.command.plugin.PluginsFreezeCommand;
 import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.gitbeaver.plugin.SimplePlugin;
@@ -27,6 +28,7 @@ public class CommandParser {
                 GitCloneCommand.class,
                 PluginCompileCommand.class,
                 PluginEnableCommand.class,
+                PluginInstallCommand.class,
                 PluginsFreezeCommand.class
         ).getCommands());
     }

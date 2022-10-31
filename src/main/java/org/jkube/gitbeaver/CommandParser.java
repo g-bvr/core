@@ -38,17 +38,20 @@ public class CommandParser {
     }
 
     public Command parseCommand(String line, List<String> arguments) {
-        Expect.size(arguments,0).elseFail("Non empty arguments list was passed to parseCommand()");
+        Expect.size(arguments, 0).elseFail("Non empty arguments list was passed to parseCommand()");
         String trimmed = line.trim();
         if (trimmed.isEmpty() || trimmed.startsWith(COMMENT_PREFIX)) {
             return null;
         }
-        String[] split = trimmed.split(" ");
-        Command res = findCommand(split);
+        return parseCommand(trimmed.split(" "), arguments);
+    }
+
+    public Command parseCommand(String[] splitLine, List<String> arguments) {
+        Command res = findCommand(splitLine);
         if (res == null) {
             return null;
         }
-        copyArguments(split, res.keywords().size(), arguments);
+        copyArguments(splitLine, res.keywords().size(), arguments);
         return checkNumArgs(res, arguments.size()) ? res : null;
     }
 

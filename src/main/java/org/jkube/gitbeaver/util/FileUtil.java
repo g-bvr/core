@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -108,6 +109,10 @@ public class FileUtil {
 
     public static void store(Path path, List<String> lines) {
         onException(() -> Files.write(path, lines)).fail("Could not write lines to file: "+path);
+    }
+
+    public static void storeWithoutNewline(Path path, String line) {
+        onException(() -> Files.writeString(path, line)).fail("Could not write line to file: "+path);
     }
 
     public static void store(Path path, String text) {

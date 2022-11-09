@@ -114,7 +114,9 @@ public class ExternalProcess {
 		Process proc = pb.start();
 		OutputReader outReader = createReader(proc.getInputStream(), logConsole, false);
 		OutputReader errReader = createReader(proc.getErrorStream(), logConsole, true);
+		Log.log("Process started");
 		proc.waitFor(timeout, TimeUnit.SECONDS);
+		Log.log("Process ended");
 		long seconds = (System.currentTimeMillis() - timestamp + 500)/1000;
 		String runtimeMessage = "(was running for "+seconds+" seconds)";
 		if (seconds < RUNTIME_WARN) {

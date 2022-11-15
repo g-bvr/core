@@ -13,8 +13,8 @@
     <properties>
         <junit.version>5.5.2</junit.version>
         <jkube.version>0.6.8</jkube.version>
-        <maven.compiler.source>15</maven.compiler.source>
-        <maven.compiler.target>15</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <dockerfile.skip>false</dockerfile.skip>
         <docker.image>core</docker.image>
         <docker.repo.user>gitbeaver</docker.repo.user>

@@ -1,4 +1,5 @@
-
-# JetBrains IDE
-.idea/
-/git-beaver.iml
+/.idea/
+/target/
+/workdir/
+*.class
+*.iml

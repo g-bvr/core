@@ -25,6 +25,6 @@ jobs:
     - name:  Build docker image
       run: docker build . -t gitbeaver/core
     - name:  Docker login
-      run: docker login -u gitbeaver -p ${GITBEAVER_PUSH_TOKEN}
+      run: docker login -u gitbeaver -p ${{ secrets.GITBEAVER_PUSH_TOKEN }}
     - name:  Push docker image
       run: docker push gitbeaver/core

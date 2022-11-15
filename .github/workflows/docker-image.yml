@@ -21,6 +21,10 @@ jobs:
     - name: Build the jar file
       run:  mvn -B package -Dgit.branch=$BITBUCKET_BRANCH
     - name:  List
-      run: ls -rl
+      run: ls -Rl
     - name:  Build docker image
       run: docker build . -t gitbeaver/core
+    - name:  Docker login
+      run: docker login -u gitbeaver -p ${GITBEAVER_PUSH_TOKEN}
+    - name:  Push docker image
+      run: docker push gitbeaver/core

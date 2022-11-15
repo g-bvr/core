@@ -14,7 +14,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set push password
+    - name: Set docker push password
       run: sed -i "s~<properties>~<properties><docker.repo.password>$GITBEAVER_PUSH_TOKEN</docker.repo.password>~" pom.xml
     - name: Build the Docker image
       run:  mvn -B package -Dgit.branch=$BITBUCKET_BRANCH

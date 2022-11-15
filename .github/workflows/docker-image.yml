@@ -18,7 +18,9 @@ jobs:
       with:
         distribution: 'zulu' # See 'Supported distributions' for available options
         java-version: '17'
-    - name: Set docker push password
-      run: sed -i "s~<properties>~<properties><docker.repo.password>$GITBEAVER_PUSH_TOKEN</docker.repo.password>~" pom.xml
-    - name: Build the Docker image
+    - name: Build the jar file
       run:  mvn -B package -Dgit.branch=$BITBUCKET_BRANCH
+    - name:  List
+      run: ls -rl
+    - name:  Build docker image
+      run: docker build . -t gitbeaver/core

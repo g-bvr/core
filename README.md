@@ -4,3 +4,4 @@ This repository builds the core gitbeaver component. It builds a docker image th
 contains the main jar file. 
 
 ## Commands 
+

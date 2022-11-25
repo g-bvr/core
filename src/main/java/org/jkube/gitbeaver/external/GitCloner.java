@@ -1,6 +1,5 @@
 package org.jkube.gitbeaver.external;
 
-import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.applicationlog.DefaultLogConsole;
 import org.jkube.gitbeaver.interfaces.ApplicationLogger;
 import org.jkube.gitbeaver.util.ExternalProcess;
@@ -15,6 +14,10 @@ public class GitCloner {
 
     public void doSimulatedCloning(Path repositoryPath) {
         simulateClonePath = repositoryPath;
+    }
+
+    public void doSimulatedCloning(String repositoryPathOrNull) {
+        simulateClonePath = repositoryPathOrNull == null ? null : Path.of(repositoryPathOrNull);
     }
 
     public void clone(Path workdir, URL gitUrl, String repository, String tag, ApplicationLogger logger) {

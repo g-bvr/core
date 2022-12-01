@@ -65,6 +65,10 @@ public class FileUtil {
     }
 
     public static void expectEqualTrees(Path path1, Path path2) {
+        Expect.equal(path1.toFile().exists(), path2.toFile().exists()).elseFail("mismatching file existence");
+        if (!path1.toFile().exists()) {
+            return;
+        }
         File file1 = path1.toFile();
         File file2 = path2.toFile();
         Expect.equal(file1.isDirectory(), file2.isDirectory())

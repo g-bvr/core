@@ -1,5 +1,6 @@
 package org.jkube.gitbeaver;
 
+import org.jkube.gitbeaver.util.FileUtil;
 import org.jkube.util.Expect;
 
 import java.nio.file.Path;
@@ -26,6 +27,7 @@ public class WorkSpace {
         Path resolvedPath = workdir.resolve(relativePath);
         Path parentPath = resolvedPath.getParent();
         Path child = resolvedPath.getFileName();
+        FileUtil.createIfNotExists(parentPath);
         Path parentRealPath = onException(() -> parentPath.toRealPath())
                 .fail("could not get parent's real path: "+resolvedPath);
         Expect.isTrue(parentRealPath.startsWith(workdir))

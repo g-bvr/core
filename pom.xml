@@ -12,7 +12,7 @@
     </parent>
     <properties>
         <junit.version>5.5.2</junit.version>
-        <jkube.version>0.6.8</jkube.version>
+        <jkube.version>0.7.1</jkube.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <dockerfile.skip>true</dockerfile.skip>

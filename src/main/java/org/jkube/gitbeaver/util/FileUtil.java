@@ -103,9 +103,14 @@ public class FileUtil {
     public static List<String> readLines(Path path) {
         return onException(() -> Files.readAllLines(path)).fail("Could not load lines of "+path);
     }
+
     public static void append(String line, File file) {
+        append(List.of(line), file);
+    }
+
+    public static void append(List<String> lines, File file) {
         try (PrintWriter output = new PrintWriter(new FileWriter(file, true))) {
-            output.println(line);
+            lines.forEach(output::println);
         } catch (IOException e) {
             Application.fail("could not append to file "+ file);
         }

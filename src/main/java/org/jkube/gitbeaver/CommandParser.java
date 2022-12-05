@@ -39,7 +39,7 @@ public class CommandParser {
 
     public Command parseCommand(String line, List<String> arguments) {
         Expect.size(arguments, 0).elseFail("Non empty arguments list was passed to parseCommand()");
-        String trimmed = line.trim();
+        String trimmed = line.trim().replaceAll("\\s+", " ");
         if (trimmed.isEmpty() || trimmed.startsWith(COMMENT_PREFIX)) {
             return null;
         }

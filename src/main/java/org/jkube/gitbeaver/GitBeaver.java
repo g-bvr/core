@@ -7,10 +7,14 @@ import org.jkube.gitbeaver.interfaces.FileResolver;
 import org.jkube.gitbeaver.plugin.PluginManager;
 import org.jkube.logging.Log;
 
+import java.nio.file.Path;
 import java.util.Map;
 
 public class GitBeaver {
     public static final String BEAVER_EXTENSION = ".bvr";
+
+    public static final Path SECRETS_DIRECTORY = Path.of("/secret/");
+
     private static final String MAIN_VARIABLE = "main";
     private static final String MAIN_DEFAULT = "main";
     public static final String RUN_ID_VARIABLE = "run";

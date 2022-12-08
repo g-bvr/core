@@ -11,6 +11,8 @@ import java.util.Map;
 
 public class ScriptExecutor {
 
+    public static final String RETURN_VALUE_VARIABLE = "RETURN_VALUE";
+
     private final CommandParser commandParser;
 
     private String currentLine;
@@ -22,11 +24,11 @@ public class ScriptExecutor {
         this.commandParser = commandParser;
     }
 
-    public void execute(String script, String forItem, Map<String, String> variables, WorkSpace workSpace) {
-        execute(script, forItem, variables, workSpace, workSpace);
+    public String execute(String script, String forItem, Map<String, String> variables, WorkSpace workSpace) {
+        return execute(script, forItem, variables, workSpace, workSpace);
     }
 
-    public void execute(String script, String forItem, Map<String, String> variables, WorkSpace scriptWorkSpace, WorkSpace executionWorkspace) {
+    public String execute(String script, String forItem, Map<String, String> variables, WorkSpace scriptWorkSpace, WorkSpace executionWorkspace) {
         Log.log("Executing script "+script+(forItem == null ? "" : " for "+forItem)+" in "+executionWorkspace.getWorkdir());
         List<String> scriptLines = GitBeaver.fileResolver().resolve(
                 scriptWorkSpace.getWorkdir(),
@@ -35,6 +37,7 @@ public class ScriptExecutor {
                 false);
         Expect.notNull(scriptLines).elseFail("Script file does not exist: "+script);
         scriptLines.forEach(line -> executeLine(line, variables, executionWorkspace));
+        return variables.get(ScriptExecutor.RETURN_VALUE_VARIABLE);
     }
 
     private void executeLine(String line, Map<String, String> variables, WorkSpace workSpace) {

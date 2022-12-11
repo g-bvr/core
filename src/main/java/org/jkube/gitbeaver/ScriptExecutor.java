@@ -37,7 +37,11 @@ public class ScriptExecutor {
                 false);
         Expect.notNull(scriptLines).elseFail("Script file does not exist: "+script);
         scriptLines.forEach(line -> executeLine(line, variables, executionWorkspace));
-        return variables.get(ScriptExecutor.RETURN_VALUE_VARIABLE);
+        String result = variables.get(ScriptExecutor.RETURN_VALUE_VARIABLE);
+        if (result != null) {
+            Log.log("Return value executing {}: {}", script, result);
+        }
+        return result;
     }
 
     private void executeLine(String line, Map<String, String> variables, WorkSpace workSpace) {

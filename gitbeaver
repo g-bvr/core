@@ -1,5 +1,5 @@
 #!/bin/sh
-java -cp main.jar:plugins org.jkube.gitbeaver.Main $@
+java -cp main.jar:plugins --add-opens java.base/java.lang=ALL-UNNAMED org.jkube.gitbeaver.Main $@
 EXITCODE=$?
 if test $EXITCODE -ne 0
 then

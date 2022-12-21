@@ -1,6 +1,6 @@
 #!/bin/sh
 echo $GITBEAVER_MASTERKEY > /masterkey
-export $GITBEAVER_MASTERKEY=deleted
+export GITBEAVER_MASTERKEY=deleted
 java -cp main.jar:plugins --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED org.jkube.gitbeaver.Main $@
 EXITCODE=$?
 if test $EXITCODE -ne 0

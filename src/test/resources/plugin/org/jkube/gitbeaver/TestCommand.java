@@ -3,15 +3,15 @@ package org.jkube.gitbeaver;
 import org.jkube.logging.Log;
 
 import java.util.List;
+import java.util.Map;
 
 public class TestCommand extends SimpleCommand {
-
     protected TestCommand() {
-        super(0, "test");
+        super("test", "test");
     }
 
     @Override
-    protected void execute(WorkSpace workSpace, List<String> arguments) {
+    protected void execute(WorkSpace workSpace, Map<String, String> arguments) {
         Log.log("Executed test command");
     }
 }

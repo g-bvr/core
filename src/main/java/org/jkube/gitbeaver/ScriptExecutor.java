@@ -6,6 +6,7 @@ import org.jkube.logging.Log;
 import org.jkube.util.Expect;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +46,7 @@ public class ScriptExecutor {
     }
 
     private void executeLine(String line, Map<String, String> variables, WorkSpace workSpace) {
-        List<String> arguments = new ArrayList<>();
+        Map<String, String> arguments = new LinkedHashMap<>();
         previousLine = currentLine;
         currentLine = line;
         String substituted = VariableSubstitution.substituteVariables(line, variables);

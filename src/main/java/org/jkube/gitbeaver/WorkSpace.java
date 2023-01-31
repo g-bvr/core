@@ -24,6 +24,9 @@ public class WorkSpace {
     }
 
     public Path getAbsolutePath(String relativePath) {
+        if (relativePath == null) {
+            return workdir;
+        }
         Path resolvedPath = workdir.resolve(relativePath);
         Path parentPath = resolvedPath.getParent();
         Path child = resolvedPath.getFileName();

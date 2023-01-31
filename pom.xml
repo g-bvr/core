@@ -5,6 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>git-beaver</artifactId>
     <version>0.0.1</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>15</source>
+                    <target>15</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <parent>
         <groupId>org.jkube</groupId>
         <artifactId>parent</artifactId>
@@ -19,6 +31,7 @@
         <docker.image>core</docker.image>
         <docker.repo.user>gitbeaver</docker.repo.user>
         <main.class>org.jkube.gitbeaver.Main</main.class>
+        <java.version>15</java.version>
     </properties>
     <dependencies>
         <dependency>

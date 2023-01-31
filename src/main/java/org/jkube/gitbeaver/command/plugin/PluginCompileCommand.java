@@ -7,6 +7,7 @@ import org.jkube.gitbeaver.plugin.PluginCompiler;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 
 import static org.jkube.logging.Log.onException;
 
@@ -15,13 +16,21 @@ import static org.jkube.logging.Log.onException;
  */
 public class PluginCompileCommand extends SimpleCommand {
 
+    private static final String PLUGIN_DIRECTORY = "directory";
+
     public PluginCompileCommand() {
-        super(1, "plugin", "compile");
+        super("PLUGIN COMPILE", """
+               This command compiles the source files of a plugin. The java sources are supposed to reside in a
+               directory within the workspace. The compiled class files are written to the class path.
+            """);
+        argument(PLUGIN_DIRECTORY, """
+                The directory (relative to workspace path) in which the plugin source files are located.
+            """);
     }
 
     @Override
-    protected void execute(WorkSpace workSpace, List<String> arguments) {
-        Path sourcePath = workSpace.getAbsolutePath(arguments.get(0));
+    protected void execute(WorkSpace workSpace, Map<String, String> arguments) {
+        Path sourcePath = workSpace.getAbsolutePath(arguments.get(PLUGIN_DIRECTORY));
         new PluginCompiler(Environment.classPath()).compile(sourcePath);
     }
 

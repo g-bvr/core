@@ -1,5 +1,6 @@
 package org.jkube.gitbeaver.interfaces;
 
+import org.jkube.gitbeaver.CommandPattern;
 import org.jkube.gitbeaver.WorkSpace;
 
 import java.util.List;
@@ -7,11 +8,13 @@ import java.util.Map;
 
 public interface Command {
 
-    int minNumArgs();
+    void postConstruct();
 
-    Integer maxNumArgs();
+    String getDescription();
 
-    List<String> keywords();
+    Map<String,String> getArguments();
 
-    void execute(Map<String, String> variables, WorkSpace workSpace, List<String> arguments);
+    List<CommandPattern> getCommandPatterns();
+
+    void execute(Map<String, String> variables, WorkSpace workSpace, Map<String, String> arguments);
 }

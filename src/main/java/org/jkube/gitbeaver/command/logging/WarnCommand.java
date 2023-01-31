@@ -7,18 +7,22 @@ import org.jkube.gitbeaver.WorkSpace;
 import java.util.List;
 import java.util.Map;
 
+import static org.jkube.gitbeaver.CommandParser.REST;
+
 /**
  * Usage: log ...
  */
 public class WarnCommand extends AbstractCommand {
 
     public WarnCommand() {
-        super(0, null, "warn");
+        super("Log a text as warning");
+        commandline("WARN *");
+        argument(REST, "String to be logged");
     }
 
     @Override
-    public void execute(Map<String, String> variables, WorkSpace workSpace, List<String> arguments) {
-        GitBeaver.getApplicationLogger(variables).warn(String.join(" ", arguments));
+    public void execute(Map<String, String> variables, WorkSpace workSpace, Map<String, String> arguments) {
+        GitBeaver.getApplicationLogger(variables).warn(arguments.get(REST));
     }
 
 }

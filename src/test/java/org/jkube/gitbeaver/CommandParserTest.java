@@ -1,5 +1,11 @@
 package org.jkube.gitbeaver;
 
+import static org.jkube.gitbeaver.CommandParser.REST;
+
+import org.jkube.gitbeaver.command.GitCloneCommand;
+import org.jkube.gitbeaver.command.logging.LogCommand;
+import org.jkube.gitbeaver.command.plugin.PluginCompileCommand;
+import org.jkube.gitbeaver.command.plugin.PluginsFreezeCommand;
 import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.gitbeaver.util.test.TestUtil;
 import org.junit.jupiter.api.Assertions;
@@ -7,8 +13,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class CommandParserTest {
 
@@ -23,63 +28,65 @@ public class CommandParserTest {
 
     @Test
     void parseLog() {
-        testParse("log", "", true);
-        testParse("log", "abc", true);
-        testParse("log", "abc def ghi jkl mno pqr", true);
+        testParse("LOG", LogCommand.class, Map.of());
+        testParse("LOG abc", LogCommand.class, Map.of(REST, "abc"));
+        testParse("LOG abc def", LogCommand.class, Map.of(REST, "abc def"));
+        testParse("LOG :-@", LogCommand.class, Map.of(REST, ":-@"));
+        testParse("LOG  a  b", LogCommand.class, Map.of(REST, " a  b"));
+        testParse("LOG   ", LogCommand.class, Map.of(REST, "  "));
     }
 
     @Test
     void parseGitClone() {
-        testParse("git clone", "", false);
-        testParse("git clone", "url repo", true);
-        testParse("git clone", "url repo tag", true);
-        testParse("git clone", "url repo tag ?", false);
+        testParse("GIT CLONE", null, null);
+        testParse("GIT CLONE url repo", GitCloneCommand.class, Map.of("baseurl", "url", "repository", "repo"));
+        testParse("GIT CLONE url repo 1.0", GitCloneCommand.class, Map.of("baseurl", "url", "repository", "repo", "tag", "1.0"));
+        testParse("GIT CLONE url repo 1.0 ?", null, null);
     }
 
     @Test
     void parsePluginCompile() {
-        testParse("plugin compile", "", false);
-        testParse("plugin compile", "dir", true);
-        testParse("plugin compile", "dir ?", false);
+        testParse("PLUGIN COMPILE", null, null);
+        testParse("PLUGIN COMPILE dir", PluginCompileCommand.class, Map.of("directory", "dir"));
     }
 
     @Test
     void parsePluginEnable() {
-        testParse("plugin enable", "", false);
-        testParse("plugin enable", "class", true);
-        testParse("plugin enable", "class ?", false);
+        testParse("PLUGIN ENABLE", null, null);
+        testParse("PLUGIN ENABLE name", PluginCompileCommand.class, Map.of("plugin", "name"));
     }
 
     @Test
     void parsePluginsFreeze() {
-        testParse("plugins freeze", "", true);
-        testParse("plugins freeze", "?", false);
+        testParse("PLUGINS FREEZE", PluginsFreezeCommand.class, Map.of());
+        testParse("PLUGINS FREEZE ?", null, null);
     }
 
     @Test
     void parseUnknownCommand() {
-        testParse("unknown", "", false);
-        testParse("unknown", "abc", false);
+        testParse("UNKNOWN", null, null);
+        testParse("UNKNOWN abc", null, null);
+        testParse("UNKNOWN LOG", null, null);
     }
 
     @Test
     void parseEmptyLine() {
         CommandParser parser = new CommandParser();
-        List<String> parsedargs = new ArrayList<>();
+        Map<String, String> parsedargs = new HashMap<>();
         Command pc = parser.parseCommand("", parsedargs);
         Assertions.assertNull(pc);
         TestUtil.assertNoFailures();
     }
 
-    void testParse(String command, String args, boolean ok) {
+    void testParse(String commandLine, Class<? extends Command> expectedCommand, Map<String,String> expectedArgs) {
         CommandParser parser = new CommandParser();
-        List<String> parsedargs = new ArrayList<>();
-        Command pc = parser.parseCommand(command+" "+args, parsedargs);
-        if (ok) {
+        Map<String, String> parsedargs = new LinkedHashMap<>();
+        Command pc = parser.parseCommand(commandLine, parsedargs);
+        if (expectedCommand != null) {
             Assertions.assertNotNull(pc);
             TestUtil.assertNoFailures();
-            Assertions.assertEquals(command, String.join(" ", pc.keywords()));
-            Assertions.assertEquals(args, String.join(" ", parsedargs));
+            Assertions.assertNotNull(pc);
+            Assertions.assertEquals(parsedargs, expectedArgs);
         } else {
             Assertions.assertNull(pc);
             TestUtil.assertFailure();

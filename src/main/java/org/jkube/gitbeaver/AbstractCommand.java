@@ -1,44 +1,64 @@
 package org.jkube.gitbeaver;
 
+import org.jkube.application.Application;
 import org.jkube.gitbeaver.interfaces.Command;
-import org.jkube.util.Expect;
+import org.jkube.logging.Log;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class AbstractCommand implements Command {
 
-    private final int minNumArgs;
-    private final Integer maxNumArgs;
-    private final List<String> keywords;
+    private final List<CommandPattern> commandPatterns = new ArrayList<>();
+    private final Map<String, String> argumentDescriptions = new LinkedHashMap<>();
 
-    protected AbstractCommand(int minNumArgs, Integer maxNumArgs, String... keywords) {
-        this.minNumArgs = minNumArgs;
-        this.maxNumArgs = maxNumArgs;
-        this.keywords = List.of(keywords);
+    private final String description;
+    private boolean onlyOneVariant = false;
+
+    protected AbstractCommand(String description) {
+        this.description = description;
+    }
+
+    protected void commandline(String commandPattern) {
+        this.commandPatterns.add(CommandParser.createPattern(commandPattern, description));
+        onlyOneVariant = true;
+    }
+
+    protected void commandlineVariant(String commandPattern, String description) {
+        this.commandPatterns.add(CommandParser.createPattern(commandPattern, description));
+    }
+
+    protected void argument(String variable, String description) {
+        argumentDescriptions.put(variable, description);
     }
 
     @Override
-    public int minNumArgs() {
-        return minNumArgs;
+    public String getDescription() {
+        return description;
     }
 
     @Override
-    public Integer maxNumArgs() {
-        return maxNumArgs;
+    public void postConstruct() {
+        if (getCommandPatterns().isEmpty()) {
+            Log.error("No commandline specified, use commandlineVariant() or commandline()");
+        }
+        if (onlyOneVariant && (getCommandPatterns().size() != 1)) {
+            Log.error("Multiple commandline variants specified, use commandlineVariant() instead of commandline()");
+        }
+        Set<String> argumentsFoundInCommands = new HashSet<>();
+        getCommandPatterns().forEach(cp -> argumentsFoundInCommands.addAll(cp.getArguments()));
+        if (!argumentsFoundInCommands.equals(argumentDescriptions.keySet())) {
+            Log.error("Found argumens {} do not match described arguments {} in step {}", argumentsFoundInCommands, argumentDescriptions.keySet(), getClass().getName());
+        }
     }
 
     @Override
-    public List<String> keywords() {
-        return keywords;
+    public Map<String,String> getArguments() {
+        return argumentDescriptions;
     }
 
-    protected void expectArg(int pos, String expected, List<String> arguments) {
-        Expect.isTrue(expected.equalsIgnoreCase(arguments.get(pos))).elseFail("Expected '"+expected+"' at position "+pos+", got: "+arguments.get(pos));
-    }
-
-    protected void expectNumArgs(int expected, List<String> arguments) {
-        Expect.equal(expected, arguments.size()).elseFail("Expected "+expected+" arguments, got "+arguments.size());
+    @Override
+    public List<CommandPattern> getCommandPatterns() {
+        return commandPatterns;
     }
 
 }

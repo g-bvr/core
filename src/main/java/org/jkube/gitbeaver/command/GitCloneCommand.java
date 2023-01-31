@@ -16,15 +16,33 @@ import static org.jkube.logging.Log.onException;
  */
 public class GitCloneCommand extends AbstractCommand {
 
+    private static final String BASE_URL = "baseurl";
+    private static final String REPOSITORY = "repository";
+
+    private static final String TAG = "tag";
+
     public GitCloneCommand() {
-        super(2, 3, "git", "clone");
+        super("""
+                Simple git cloning command.
+            """
+        );
+        argument(BASE_URL, "The url prefix of the repository (not including the actual repo name)");
+        argument(REPOSITORY, "The name of the repository (which together with the base url constitutes the url of the repository)");
+        argument(TAG, "Optional argument to specify either a branch or a tag which shall be checked out (if omitted the default branch will be used)");
+        commandlineVariant("GIT CLONE "+BASE_URL+" "+REPOSITORY+" "+TAG, """
+                Clones the head of a branch or a tag of a git repository.
+            """);
+        commandlineVariant("GIT CLONE "+BASE_URL+" "+REPOSITORY, """
+                Clones the default branch of a git repository.
+            """);
     }
 
     @Override
-    public void execute(Map<String, String> variables, WorkSpace workSpace, List<String> arguments) {
-        URL url = onException(() -> new URL(arguments.get(0))).fail("Could not parse url "+arguments.get(0));
-        String repository = arguments.get(1);
-        String tag = arguments.size() == 3 ? arguments.get(2) : null;
+    public void execute(Map<String, String> variables, WorkSpace workSpace, Map<String, String> arguments) {
+        String urlString = arguments.get(BASE_URL);
+        String repository = arguments.get(REPOSITORY);
+        String tag = arguments.get(TAG);
+        URL url = onException(() -> new URL(urlString)).fail("Could not parse url "+urlString);
         GitBeaver.gitCloner().clone(workSpace.getWorkdir(), url, repository, tag, GitBeaver.getApplicationLogger(variables));
     }
 

@@ -7,6 +7,7 @@ import org.jkube.gitbeaver.plugin.PluginManager;
 import org.jkube.logging.Log;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Usage: plugins freeze
@@ -14,11 +15,15 @@ import java.util.List;
 public class PluginsFreezeCommand extends SimpleCommand {
 
     public PluginsFreezeCommand() {
-        super(0, "plugins", "freeze");
+        super("PLUGINS FREEZE", """
+               This command freezes the plugin state. This means that subsequent calls of PLUGIN ENABLE, PLUGIN INSTALL
+               or PLUGIN COMPILE are prohibited. This is considered a security feature and should be used in
+               the core docker file setup before any custom beaver scripts are executed.
+            """);
     }
 
     @Override
-    protected void execute(WorkSpace workSpace, List<String> arguments) {
+    protected void execute(WorkSpace workSpace, Map<String, String> arguments) {
         PluginManager.setPluginsFrozen();
     }
 

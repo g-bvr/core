@@ -14,7 +14,9 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PluginTest {
 
@@ -45,7 +47,7 @@ public class PluginTest {
         compiler.compile(Path.of(PLUGIN_SOURCE_PATH));
         Log.log("Done compiling");
         GitBeaver.pluginManager().enable(PLUGIN_CLASS);
-        Command command = GitBeaver.commandParser().parseCommand("test", new ArrayList<>());
+        Command command = GitBeaver.commandParser().parseCommand("test", new HashMap<>());
         Assertions.assertNotNull(command);
         command.execute(null, null, null);
         TestUtil.assertNoFailures();
@@ -55,12 +57,12 @@ public class PluginTest {
     public void noCompileIfFrozen() {
         Environment.setDefault(Environment.GITBEAVER_CLASSPATH, CLASS_PATH);
         PluginCompiler compiler = new PluginCompiler(Path.of(CLASS_PATH));
-        List<String> arguments = new ArrayList<>();
-        Command freezecommand = GitBeaver.commandParser().parseCommand("plugins freeze", arguments);
+        Map<String,String> arguments = new HashMap<>();
+        Command freezecommand = GitBeaver.commandParser().parseCommand("PLUGINS FREEZE", arguments);
         Assertions.assertNotNull(freezecommand);
         Assertions.assertTrue(arguments.isEmpty());
         freezecommand.execute(null, null, arguments);
-        Command compilecommand = GitBeaver.commandParser().parseCommand("plugin compile "+PLUGIN_SOURCE_PATH, arguments);
+        Command compilecommand = GitBeaver.commandParser().parseCommand("PLUGIN COMPILE "+PLUGIN_SOURCE_PATH, arguments);
         Assertions.assertNotNull(freezecommand);
         WorkSpace workSpace = new WorkSpace(".");
         Assertions.assertEquals(1, arguments.size());

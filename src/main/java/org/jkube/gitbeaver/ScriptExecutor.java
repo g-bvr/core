@@ -5,7 +5,6 @@ import org.jkube.gitbeaver.util.VariableSubstitution;
 import org.jkube.logging.Log;
 import org.jkube.util.Expect;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;

@@ -1,16 +1,13 @@
 package org.jkube.gitbeaver.plugin;
 
 import org.jkube.gitbeaver.GitBeaver;
-import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.interfaces.Plugin;
 import org.jkube.gitbeaver.util.FileUtil;
 import org.jkube.logging.Log;
 import org.jkube.util.Expect;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.jkube.logging.Log.onException;
@@ -31,7 +28,7 @@ public class PluginManager {
         plugins.values().forEach(Plugin::shutdown);
     }
 
-    public static boolean checkPluginsNotFrozen() {
+    public boolean checkPluginsNotFrozen() {
         Expect.isFalse(pluginsFrozen).elseFail("Plugins are frozen");
         return !pluginsFrozen;
     }

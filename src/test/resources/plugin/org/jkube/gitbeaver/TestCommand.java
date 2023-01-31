@@ -2,7 +2,6 @@ package org.jkube.gitbeaver;
 
 import org.jkube.logging.Log;
 
-import java.util.List;
 import java.util.Map;
 
 public class TestCommand extends SimpleCommand {

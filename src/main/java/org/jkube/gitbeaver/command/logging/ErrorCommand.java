@@ -1,13 +1,12 @@
 package org.jkube.gitbeaver.command.logging;
 
-import static org.jkube.gitbeaver.CommandParser.REST;
-
 import org.jkube.gitbeaver.AbstractCommand;
-import org.jkube.gitbeaver.CommandParser;
 import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.WorkSpace;
 
 import java.util.Map;
+
+import static org.jkube.gitbeaver.CommandParser.REST;
 
 /**
  * Usage: log ...

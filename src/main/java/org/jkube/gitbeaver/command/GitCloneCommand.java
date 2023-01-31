@@ -1,12 +1,10 @@
 package org.jkube.gitbeaver.command;
 
 import org.jkube.gitbeaver.AbstractCommand;
-import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.WorkSpace;
 
 import java.net.URL;
-import java.util.List;
 import java.util.Map;
 
 import static org.jkube.logging.Log.onException;

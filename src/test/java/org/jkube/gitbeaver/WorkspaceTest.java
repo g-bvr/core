@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class WorkspaceTest {
 
     public static final String SRC_TEST_RESOURCES = "src/test/resources";

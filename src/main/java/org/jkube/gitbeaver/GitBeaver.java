@@ -1,8 +1,8 @@
 package org.jkube.gitbeaver;
 
 import org.jkube.gitbeaver.applicationlog.ApplicationLogHandler;
-import org.jkube.gitbeaver.external.GitCloner;
 import org.jkube.gitbeaver.applicationlog.CombinedApplicationLoggers;
+import org.jkube.gitbeaver.external.GitCloner;
 import org.jkube.gitbeaver.interfaces.FileResolver;
 import org.jkube.gitbeaver.plugin.PluginManager;
 import org.jkube.logging.Log;

@@ -1,12 +1,9 @@
 package org.jkube.gitbeaver.command.plugin;
 
-import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.SimpleCommand;
 import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.plugin.PluginManager;
-import org.jkube.logging.Log;
 
-import java.util.List;
 import java.util.Map;
 
 /**

@@ -3,13 +3,8 @@ package org.jkube.gitbeaver.command.plugin;
 import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.SimpleCommand;
 import org.jkube.gitbeaver.WorkSpace;
-import org.jkube.gitbeaver.plugin.PluginCompiler;
-import org.jkube.gitbeaver.util.Environment;
 import org.jkube.logging.Log;
-import org.jkube.util.Expect;
 
-import java.nio.file.Path;
-import java.util.List;
 import java.util.Map;
 
 /**

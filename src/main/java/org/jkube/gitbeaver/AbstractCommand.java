@@ -1,6 +1,5 @@
 package org.jkube.gitbeaver;
 
-import org.jkube.application.Application;
 import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.logging.Log;
 

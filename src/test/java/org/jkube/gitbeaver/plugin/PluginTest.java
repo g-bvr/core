@@ -1,10 +1,10 @@
 package org.jkube.gitbeaver.plugin;
 
 import org.jkube.gitbeaver.GitBeaver;
-import org.jkube.gitbeaver.util.test.TestUtil;
 import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.gitbeaver.util.Environment;
+import org.jkube.gitbeaver.util.test.TestUtil;
 import org.jkube.logging.Log;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,9 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class PluginTest {

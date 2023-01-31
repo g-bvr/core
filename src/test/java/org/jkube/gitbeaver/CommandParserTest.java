@@ -1,7 +1,5 @@
 package org.jkube.gitbeaver;
 
-import static org.jkube.gitbeaver.CommandParser.REST;
-
 import org.jkube.gitbeaver.command.GitCloneCommand;
 import org.jkube.gitbeaver.command.logging.LogCommand;
 import org.jkube.gitbeaver.command.plugin.PluginCompileCommand;
@@ -13,7 +11,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import static org.jkube.gitbeaver.CommandParser.REST;
 
 public class CommandParserTest {
 

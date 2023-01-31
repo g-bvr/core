@@ -1,5 +1,6 @@
 package org.jkube.gitbeaver.plugin;
 
+import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.logging.Log;
 
 import javax.tools.JavaCompiler;
@@ -11,9 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static org.jkube.logging.Log.exception;
-import static org.jkube.logging.Log.onException;
 
 public class PluginCompiler {
 
@@ -28,7 +26,7 @@ public class PluginCompiler {
     }
 
     public void compile(Path sourcePath) {
-        if (PluginManager.checkPluginsNotFrozen()) {
+        if (GitBeaver.pluginManager().checkPluginsNotFrozen()) {
             try (Stream<Path> walk = Files.walk(sourcePath)) {
                 compileFiles(walk.filter(Files::isRegularFile)
                         .filter(this::isJavaFile)

@@ -1,15 +1,12 @@
 package org.jkube.gitbeaver.command.plugin;
 
-import org.jkube.gitbeaver.util.Environment;
 import org.jkube.gitbeaver.SimpleCommand;
 import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.plugin.PluginCompiler;
+import org.jkube.gitbeaver.util.Environment;
 
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Map;
-
-import static org.jkube.logging.Log.onException;
 
 /**
  * Usage: plugin compile soureDir

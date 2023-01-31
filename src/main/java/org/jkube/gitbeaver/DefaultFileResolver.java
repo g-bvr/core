@@ -7,8 +7,6 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 
-import static org.jkube.logging.Log.onException;
-
 public class DefaultFileResolver implements FileResolver {
 
     @Override

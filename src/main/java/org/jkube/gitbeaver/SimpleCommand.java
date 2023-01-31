@@ -1,8 +1,5 @@
 package org.jkube.gitbeaver;
 
-import org.jkube.gitbeaver.interfaces.Command;
-
-import java.util.List;
 import java.util.Map;
 
 /**

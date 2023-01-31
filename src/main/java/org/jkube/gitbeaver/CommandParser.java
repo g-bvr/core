@@ -1,6 +1,6 @@
 package org.jkube.gitbeaver;
 
-import org.jkube.gitbeaver.command.*;
+import org.jkube.gitbeaver.command.GitCloneCommand;
 import org.jkube.gitbeaver.command.logging.ErrorCommand;
 import org.jkube.gitbeaver.command.logging.LogCommand;
 import org.jkube.gitbeaver.command.logging.WarnCommand;

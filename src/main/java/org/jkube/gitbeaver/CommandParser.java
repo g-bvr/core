@@ -94,14 +94,14 @@ public class CommandParser {
         if (!matcher.matches()) {
             return false;
         }
-        System.out.println("Matcher "+cp.getPattern()+" matches line "+line);
+        //System.out.println("Matcher "+cp.getPattern()+" matches line "+line);
         if (matcher.groupCount() != cp.getArguments().size()) {
             Log.error("Parsing problem: got {} groups, expected {} arguments", matcher.groupCount(), cp.getArguments().size());
         }
         int i = 0;
         for (String arg : cp.getArguments()) {
             i++;
-            System.out.println("Group "+i+": "+matcher.group(i));
+            //System.out.println("Group "+i+": "+matcher.group(i));
             arguments.put(arg, matcher.group(i));
         }
         return true;

@@ -60,7 +60,7 @@ public class CommandParser {
                 arguments.add(REST);
             } else Log.error("Illegal command element: {}", s);
         }
-        return new CommandPattern(String.join(" ", elements), description, arguments);
+        return new CommandPattern(String.join("\\s+", elements), description, arguments);
     }
 
     public void addCommands(Collection<Command> commands) {
@@ -70,11 +70,11 @@ public class CommandParser {
 
     public Command parseCommand(String line, Map<String, String> arguments) {
         Expect.size(arguments.entrySet(), 0).elseFail("Non empty arguments list was passed to parseCommand()");
-        String trimmed = line.trim().replaceAll("\\s+", " ");
+        String trimmed = line.trim();
         if (trimmed.isEmpty() || trimmed.startsWith(COMMENT_PREFIX)) {
             return null;
         }
-        return findCommand(line, arguments);
+        return findCommand(trimmed, arguments);
     }
 
     public Command findCommand(String line, Map<String, String> arguments) {

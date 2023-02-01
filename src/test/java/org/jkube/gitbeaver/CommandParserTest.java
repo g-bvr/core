@@ -32,10 +32,11 @@ public class CommandParserTest {
     void parseLog() {
         testParse("LOG", LogCommand.class, Map.of());
         testParse("LOG abc", LogCommand.class, Map.of(REST, "abc"));
+        testParse(" LOG abc", LogCommand.class, Map.of(REST, "abc"));
         testParse("LOG abc def", LogCommand.class, Map.of(REST, "abc def"));
         testParse("LOG :-@", LogCommand.class, Map.of(REST, ":-@"));
-        testParse("LOG  a  b", LogCommand.class, Map.of(REST, " a  b"));
-        testParse("LOG   ", LogCommand.class, Map.of(REST, "  "));
+        testParse("LOG  a  b", LogCommand.class, Map.of(REST, "a  b"));
+        testParse("LOG   ", LogCommand.class, Map.of());
     }
 
     @Test

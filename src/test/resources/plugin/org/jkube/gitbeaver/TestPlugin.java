@@ -7,6 +7,11 @@ import org.jkube.logging.Log;
 import java.util.List;
 
 public class TestPlugin extends SimplePlugin {
+
+    public TestPlugin() {
+        super("Dummy plugin for testing");
+    }
+
     @Override
     public List<Command> getCommands() {
         return List.of(new TestCommand());

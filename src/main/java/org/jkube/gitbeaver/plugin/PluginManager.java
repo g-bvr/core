@@ -7,6 +7,7 @@ import org.jkube.logging.Log;
 import org.jkube.util.Expect;
 
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -20,8 +21,16 @@ public class PluginManager {
 
     private final Map<String, Plugin> plugins = new LinkedHashMap<>();
 
+    public PluginManager(Plugin corePlugin) {
+        plugins.put(corePlugin.getClass().getName(), corePlugin);
+    }
+
     public Plugin getPlugin(String className) {
         return plugins.get(className);
+    }
+
+    public Map<String, Plugin> getAllPlugins() {
+        return plugins;
     }
 
     public void shutdown() {

@@ -5,6 +5,8 @@ import org.jkube.gitbeaver.command.logging.LogCommand;
 import org.jkube.gitbeaver.command.plugin.PluginCompileCommand;
 import org.jkube.gitbeaver.command.plugin.PluginsFreezeCommand;
 import org.jkube.gitbeaver.interfaces.Command;
+import org.jkube.gitbeaver.plugin.CorePlugin;
+import org.jkube.gitbeaver.plugin.PluginManager;
 import org.jkube.gitbeaver.util.test.TestUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -74,7 +76,7 @@ public class CommandParserTest {
 
     @Test
     void parseEmptyLine() {
-        CommandParser parser = new CommandParser();
+        CommandParser parser = new CommandParser(new CorePlugin());
         Map<String, String> parsedargs = new HashMap<>();
         Command pc = parser.parseCommand("", parsedargs);
         Assertions.assertNull(pc);
@@ -82,7 +84,7 @@ public class CommandParserTest {
     }
 
     void testParse(String commandLine, Class<? extends Command> expectedCommand, Map<String,String> expectedArgs) {
-        CommandParser parser = new CommandParser();
+        CommandParser parser = new CommandParser(new CorePlugin());
         Map<String, String> parsedargs = new LinkedHashMap<>();
         Command pc = parser.parseCommand(commandLine, parsedargs);
         if (expectedCommand != null) {

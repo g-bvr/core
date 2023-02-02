@@ -7,6 +7,7 @@ public interface Plugin {
     List<String> getInstallationScript();
 
     void init();
+    String getDescription();
 
     List<Command> getCommands();
 

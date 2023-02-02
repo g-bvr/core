@@ -11,14 +11,20 @@ import static org.jkube.logging.Log.onException;
 
 public class SimplePlugin implements Plugin {
 
+    private final String desription;
     private final List<Command> commands;
 
     @SafeVarargs
-    public SimplePlugin(Class<? extends Command>... commandClasses) {
+    public SimplePlugin(String desciption, Class<? extends Command>... commandClasses) {
+        this.desription = desciption;
         this.commands = new ArrayList<>();
         for (Class<? extends Command> c : commandClasses) {
             this.commands.add(instantiate(c));
         }
+    }
+
+    public String getDescription() {
+        return desription;
     }
 
     private Command instantiate(Class<? extends Command> commandClass) {

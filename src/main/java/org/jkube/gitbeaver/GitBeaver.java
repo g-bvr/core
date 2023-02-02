@@ -4,6 +4,7 @@ import org.jkube.gitbeaver.applicationlog.ApplicationLogHandler;
 import org.jkube.gitbeaver.applicationlog.CombinedApplicationLoggers;
 import org.jkube.gitbeaver.external.GitCloner;
 import org.jkube.gitbeaver.interfaces.FileResolver;
+import org.jkube.gitbeaver.plugin.CorePlugin;
 import org.jkube.gitbeaver.plugin.PluginManager;
 import org.jkube.logging.Log;
 
@@ -60,11 +61,12 @@ public class GitBeaver {
     public static void run(Map<String, String> args) { SINGLETON.runMain(args); }
 
     private final GitCloner gitCloner = new GitCloner();
-    private final CommandParser commandParser = new CommandParser();
+    private final CorePlugin corePlugin = new CorePlugin();
+    private final CommandParser commandParser = new CommandParser(corePlugin);
 
     private final ScriptExecutor scriptExecutor = new ScriptExecutor(commandParser);
 
-    private final PluginManager pluginManager = new PluginManager();
+    private final PluginManager pluginManager = new PluginManager(corePlugin);
 
     private FileResolver fileResolver = new DefaultFileResolver();
 

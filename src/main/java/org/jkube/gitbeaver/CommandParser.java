@@ -9,6 +9,7 @@ import org.jkube.gitbeaver.command.plugin.PluginEnableCommand;
 import org.jkube.gitbeaver.command.plugin.PluginInstallCommand;
 import org.jkube.gitbeaver.command.plugin.PluginsFreezeCommand;
 import org.jkube.gitbeaver.interfaces.Command;
+import org.jkube.gitbeaver.plugin.CorePlugin;
 import org.jkube.gitbeaver.plugin.SimplePlugin;
 import org.jkube.logging.Log;
 import org.jkube.util.Expect;
@@ -32,17 +33,8 @@ public class CommandParser {
 
     private final List<Command> commands = new ArrayList<>();
 
-    public CommandParser() {
-        addCommands(new SimplePlugin(
-                LogCommand.class,
-                WarnCommand.class,
-                ErrorCommand.class,
-                GitCloneCommand.class,
-                PluginCompileCommand.class,
-                PluginEnableCommand.class,
-                PluginInstallCommand.class,
-                PluginsFreezeCommand.class
-        ).getCommands());
+    public CommandParser(CorePlugin corePlugin) {
+        addCommands(corePlugin.getCommands());
     }
 
     public static CommandPattern createPattern(String patternString, String description) {
@@ -60,7 +52,7 @@ public class CommandParser {
                 arguments.add(REST);
             } else Log.error("Illegal command element: {}", s);
         }
-        return new CommandPattern(String.join("\\s+", elements), description, arguments);
+        return new CommandPattern(patternString, String.join("\\s+", elements), description, arguments);
     }
 
     public void addCommands(Collection<Command> commands) {

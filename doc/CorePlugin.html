@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background-color: #FAFFFA;
+}
+#myheader {
+  font-size: 60px;
+  font-weight: 600;
+  color: #3d3d3e;
+  text-shadow: 0px 0px 5px #EEEEEE, 0px 0px 10px #EEEEEE, 0px 0px 10px #EEEEEE,
+    0px 0px 20px #EEEEEE;
+}
+#mytable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#mytable td, #mytable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#mytable tr:nth-child(even){background-color: #f2f2e2;}
+#mytable tr:nth-child(odd){background-color: #e2f2f2;}
+#mytable tr:hover {background-color: #ddd;}
+#mytable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<h1 id="myheader">CorePlugin</h1>
+<h2>Purpose</h2>
+    Collects the most elementary commands (logging, simple git cloning and plugin management).
+
+<h2>Commands</h2>
+<table id="mytable">
+<tr><th>Command</th><th>Description</td></tr>
+  <tr><td><a href="LogCommand.html">LogCommand</a></td><td>Log a text</td></tr>
+  <tr><td><a href="WarnCommand.html">WarnCommand</a></td><td>Log a text as warning</td></tr>
+  <tr><td><a href="ErrorCommand.html">ErrorCommand</a></td><td>Log a text as error</td></tr>
+  <tr><td><a href="GitCloneCommand.html">GitCloneCommand</a></td><td>    Simple git cloning command.
+</td></tr>
+  <tr><td><a href="PluginCompileCommand.html">PluginCompileCommand</a></td><td>   This command compiles the source files of a plugin. The java sources are supposed to reside in a
+   directory within the workspace. The compiled class files are written to the class path.
+</td></tr>
+  <tr><td><a href="PluginEnableCommand.html">PluginEnableCommand</a></td><td>   This command enables a plugin. The class files must be present in the class path (e.g. as
+   result of a PLUGIN COMPILE command executed before this).
+</td></tr>
+  <tr><td><a href="PluginInstallCommand.html">PluginInstallCommand</a></td><td>   This command executes system level installation steps required by a plugin.
+   If there are any installation steps to be executed on system level is defined
+   by the method Plugin.getCommands(). These steps are supposed to be executed
+   in a shell script while setting up a docker container.
+</td></tr>
+  <tr><td><a href="PluginsFreezeCommand.html">PluginsFreezeCommand</a></td><td>   This command freezes the plugin state. This means that subsequent calls of PLUGIN ENABLE, PLUGIN INSTALL
+   or PLUGIN COMPILE are prohibited. This is considered a security feature and should be used in
+   the core docker file setup before any custom beaver scripts are executed.
+</td></tr>
+</table>
+</body>
+</html>
+

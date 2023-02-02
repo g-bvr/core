@@ -43,7 +43,7 @@ The following three variables have special purpose and are equipped with default
 
 ## Documentation of defined commands
 
-A list of the built-in commands can be found in this [automatically generated documentation](https://htmlpreview.github.io/?https://raw.githubusercontent.com/g-bvr/base/main/doc/BasePlugin.html).
+A list of the built-in commands can be found in this [automatically generated documentation](https://htmlpreview.github.io/?https://raw.githubusercontent.com/g-bvr/core/main/doc/CorePlugin.html).
 
 **Note:** The git-beaver sercurity concept relies on the principle that the core image has minimal functionality and 
 is subject to few changes over time. To achieve this, only a minimally necessary set of commands is build into the core 

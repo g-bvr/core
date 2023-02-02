@@ -66,6 +66,6 @@ such a worker thread running until the web server is shut down).
 
 ## Curated open source release
 
-A [docker image]() of a curated selection of plugins is provided by the E. Breuninger GmbH & Co. in the public repository
-[e-breuninger/git-beaver](https://hub.docker.com/r/gitbeaver/release/tags).
+A [docker file](https://hub.docker.com/r/gitbeaver/release) with a curated selection of plugins is provided by the E. Breuninger GmbH & Co. in the public repository
+[e-breuninger/git-beaver](https://github.com/e-breuninger/git-beaver).
 

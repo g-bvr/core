@@ -62,7 +62,7 @@ executed code (in plugins) from using this secret value, if they are initialized
 The [java main](src/main/java/org/jkube/gitbeaver/Main.java) executes the class [GitBeaver](src/main/java/org/jkube/gitbeaver/GitBeaver.java) which serves as 
 static handler for singletons of all components. The main thread executes the beaver script specified by variable ```main``` and then terminates
 (the JVM will however stay alive as long as other threads are still running, for instance the [webserver plugin](https://github.com/g-bvr/web-server) has 
-such a worker thread running until the web server is shut down).
+such a worker thread that continues running and keeps the JVM active until the web server is shut down by a command).
 
 ## Curated open source release
 

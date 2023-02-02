@@ -63,3 +63,9 @@ The [java main](src/main/java/org/jkube/gitbeaver/Main.java) executes the class 
 static handler for singletons of all components. The main thread executes the beaver script specified by variable ```main``` and the exits
 (the JVM will however stay alive as long as other threads are still running, for instance the [webserver plugin](https://github.com/g-bvr/web-server) has 
 such a worker thread running until the web server is shut down).
+
+## Curated open source release
+
+A [docker file]() with a curated selection of plugins is provided by the E. Breuninger GmbH & Co. in the public repository
+[e-breuninger/git-beaver](https://hub.docker.com/r/gitbeaver/release/tags).
+

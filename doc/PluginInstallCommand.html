@@ -9,26 +9,45 @@ body {
   font-size: 60px;
   font-weight: 600;
   color: #3d3d3e;
-  text-shadow: 0px 0px 5px #EEEEEE, 0px 0px 10px #EEEEEE, 0px 0px 10px #EEEEEE,
+  text-shadow: 0px 0px 5px #DDDDDD, 0px 0px 10px #DDDDDD, 0px 0px 10px #EEEEEE,
     0px 0px 20px #EEEEEE;
 }
-#mytable {
+#mytable1 {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
-#mytable td, #mytable th {
+#mytable1 td, #mytable1 th {
   border: 1px solid #ddd;
   padding: 8px;
 }
-#mytable tr:nth-child(even){background-color: #f2f2e2;}
-#mytable tr:nth-child(odd){background-color: #e2f2f2;}
-#mytable tr:hover {background-color: #ddd;}
-#mytable th {
+#mytable1 tr:nth-child(even){background-color: #f2f2e2;}
+#mytable1 tr:nth-child(odd){background-color: #e2f2f2;}
+#mytable1 tr:hover {background-color: #ddd;}
+#mytable1 th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
   background-color: #04AA6D;
+  color: white;
+}
+#mytable2 {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#mytable2 td, #mytable2 th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#mytable2 tr:nth-child(even){background-color: #f2f2e2;}
+#mytable2 tr:nth-child(odd){background-color: #e2f2f2;}
+#mytable2 tr:hover {background-color: #ddd;}
+#mytable2 th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #A43A6D;
   color: white;
 }
 </style>
@@ -43,19 +62,19 @@ body {
    in a shell script while setting up a docker container.
 
 <h2>Variants</h2>
-<table id="mytable">
-<tr><th>Usage</th><th>Description</td></tr>
+<table id="mytable1">
+<tr><th>Usage</th><th>Description</th></tr>
   <tr><td>PLUGIN INSTALL plugin</td><td>   This command executes system level installation steps required by a plugin.
    If there are any installation steps to be executed on system level is defined
    by the method Plugin.getCommands(). These steps are supposed to be executed
    in a shell script while setting up a docker container.
 </td></tr>
-</table id="mytable">
+</table>
 
 <h2>Arguments</h2>
 
-<table id="mytable">
-<tr><th>Argument</th><th>Value</td></tr>
+<table id="mytable2">
+<tr><th>Argument</th><th>Value</th></tr>
   <tr><td>plugin</td><td>    The name of the plugin for which system commands are to be executed.
 </td></tr>
 </table>

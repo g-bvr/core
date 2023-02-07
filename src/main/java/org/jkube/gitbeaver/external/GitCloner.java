@@ -37,8 +37,7 @@ public class GitCloner {
             clone
                 .dir(workdir)
                 .successMarker("Cloning into ")
-                    .logConsole(logger.createSubConsole())
-                .logConsole(new DefaultLogConsole())
+                .logConsole(logger.createSubConsole())
                 .execute();
         }
     }

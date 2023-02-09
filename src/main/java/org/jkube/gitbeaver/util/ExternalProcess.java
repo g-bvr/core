@@ -34,6 +34,7 @@ public class ExternalProcess {
 	private ProcessBuilder pb;
 	private Predicate<String> lineFilter;
 	private String command;
+	private String loggedCommand;
 	private boolean nonZeroExitValueAllowed;
 	private long timeout = INITIAL_TIMEOUT;
 	private boolean hasTimedOut = false;
@@ -54,15 +55,18 @@ public class ExternalProcess {
 	public ExternalProcess command(String... command) {
 		this.pb = new ProcessBuilder(command);
 		this.successMarker = null;
-		StringBuilder sb = new StringBuilder();
-		for (String c : command) {
-			if (sb.length() > 0) {
-				sb.append(" ");
-			}
-			sb.append(c);
-		}
-		this.command = sb.toString();
+		this.command = joinWithSpaces(command);
+		this.loggedCommand = this.command;
 		return this;
+	}
+
+	public ExternalProcess loggedCommand(String... loggedCommand) {
+		this.loggedCommand = joinWithSpaces(loggedCommand);
+		return this;
+	}
+
+	private static String joinWithSpaces(String[] strings) {
+		return String.join(" ", List.of(strings));
 	}
 
 	public ExternalProcess logConsole(LogConsole logConsole) {
@@ -108,7 +112,8 @@ public class ExternalProcess {
 	}
 
 	private void tryExecute() throws IOException, InterruptedException {
-		logConsole.command(command);
+		if (loggedCommand != null)
+			logConsole.command(loggedCommand);
 		debug("COMMAND> "+command);
 		long timestamp = System.currentTimeMillis();
 		Process proc = pb.start();

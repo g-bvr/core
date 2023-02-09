@@ -21,6 +21,10 @@ public class GitCloner {
     }
 
     public void clone(Path workdir, URL gitUrl, String repository, String tag, ApplicationLogger logger) {
+        clone(workdir, gitUrl, gitUrl, repository, tag, logger);
+    }
+
+    public void clone(Path workdir, URL gitUrl, URL maskedGitUrl, String repository, String tag, ApplicationLogger logger) {
         if (simulateClonePath != null) {
             Path sourcePath = createSimulatedGitPath(repository, tag);
             Path targetPath = workdir.resolve(repository);
@@ -28,11 +32,16 @@ public class GitCloner {
             FileUtil.copyTree(sourcePath, targetPath);
         } else {
             ExternalProcess clone = new ExternalProcess();
-            String repoUrl = gitUrl.toString()+"/"+repository;
+            String url = gitUrl.toString()+"/"+repository;
+            String maskedUrl = maskedGitUrl+"/"+repository;
             if (tag == null) {
-                clone.command("git", "clone", repoUrl);
+                clone
+                        .command("git", "clone", url)
+                        .loggedCommand("git", "clone", maskedUrl);
             } else {
-                clone.command("git", "clone", "-c", "advice.detachedHead=false", "-b", tag, repoUrl);
+                clone
+                        .command("git", "clone", "-c", "advice.detachedHead=false", "-b", tag, url)
+                        .loggedCommand("git", "clone", "-c", "advice.detachedHead=false", "-b", tag, maskedUrl);
             }
             clone
                 .dir(workdir)

@@ -32,7 +32,7 @@ public class GitCloner {
             FileUtil.copyTree(sourcePath, targetPath);
         } else {
             ExternalProcess clone = new ExternalProcess();
-            String url = gitUrl.toString()+"/"+repository;
+            String url = gitUrl+"/"+repository;
             String maskedUrl = maskedGitUrl+"/"+repository;
             if (tag == null) {
                 clone

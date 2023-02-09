@@ -114,7 +114,7 @@ public class ExternalProcess {
 	private void tryExecute() throws IOException, InterruptedException {
 		if (loggedCommand != null)
 			logConsole.command(loggedCommand);
-		debug("COMMAND> "+command);
+		debug("COMMAND> "+loggedCommand);
 		long timestamp = System.currentTimeMillis();
 		Process proc = pb.start();
 		OutputReader outReader = createReader(proc.getInputStream(), logConsole, false);

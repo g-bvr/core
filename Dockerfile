@@ -1,4 +1,4 @@
-FROM openjdk:16-alpine
+FROM openjdk:17-alpine
 RUN apk add --no-cache git curl gnupg openssh
 ADD target/main.jar main.jar
 ENV GITBEAVER_CLASSPATH plugins

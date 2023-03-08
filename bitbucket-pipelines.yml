@@ -1,4 +1,4 @@
-image: jkube/maven:15-alpine
+image: jkube/maven:16-alpine
 
 pipelines:
   default:

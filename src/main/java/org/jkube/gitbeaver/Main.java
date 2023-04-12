@@ -7,12 +7,21 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Main {
+
+    private static final Thread MAIN_THREAD = Thread.currentThread();
+
     public static void main(String[] args) {
         Application.setFailureHandler((message, code) -> {
-            Log.error("Critical failure: {}, terminating VM with exit code {}", message, code);
-            System.exit(code);
+            Log.exception(new RuntimeException("Failure captured: "+message));
+            if (Thread.currentThread().equals(MAIN_THREAD)) {
+                Log.error("Failure in main: {}", message);
+                Log.error("Terminating VM with error code: {}", code);
+                System.exit(code);
+            } else {
+                Log.error("Failure in execution thread: {}", message);
+            }
         });
-        Log.log("Running gitresolver {}", Main.class.getPackage().getImplementationVersion());
+        Log.log("Running git-beaver {}", Main.class.getPackage().getImplementationVersion());
         GitBeaver.pluginManager().enableAllAvailablePlugins();
         GitBeaver.run(parseArgs(args));
         Log.log("Done.");

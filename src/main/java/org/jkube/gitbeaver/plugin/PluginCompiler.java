@@ -51,7 +51,7 @@ public class PluginCompiler {
 
     private void compileFiles(List<Path> javaFiles) {
         long timestamp = System.currentTimeMillis();
-        Log.log("Compiling {} java files...", javaFiles.size());
+        Log.log("Compiling {} java files using {} libraries...", javaFiles.size(), jarFiles.size());
         List<String> args = new ArrayList<>();
         args.add("-d");
         args.add(targetPath.toString());

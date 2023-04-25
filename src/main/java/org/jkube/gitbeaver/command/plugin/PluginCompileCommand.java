@@ -5,7 +5,10 @@ import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.plugin.PluginCompiler;
 import org.jkube.gitbeaver.util.Environment;
 
+import java.io.File;
 import java.nio.file.Path;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,6 +17,8 @@ import java.util.Map;
 public class PluginCompileCommand extends SimpleCommand {
 
     private static final String PLUGIN_DIRECTORY = "directory";
+    private static final String LIBRARIES_FOLDER = "lib";
+    private static final String JAR_EXTENSION = ".jar";
 
     public PluginCompileCommand() {
         super("PLUGIN COMPILE", """
@@ -28,7 +33,11 @@ public class PluginCompileCommand extends SimpleCommand {
     @Override
     protected void execute(WorkSpace workSpace, Map<String, String> arguments) {
         Path sourcePath = workSpace.getAbsolutePath(arguments.get(PLUGIN_DIRECTORY));
-        new PluginCompiler(Environment.classPath()).compile(sourcePath);
+        File[] jarFiles = sourcePath
+                .resolve(LIBRARIES_FOLDER)
+                .toFile()
+                .listFiles((d,fn) -> fn .endsWith(JAR_EXTENSION));
+        new PluginCompiler(Environment.classPath(), jarFiles == null ? Collections.emptyList() : List.of(jarFiles)).compile(sourcePath);
     }
 
 }

@@ -29,16 +29,19 @@ public class ScriptExecutor {
     }
 
     public String execute(String script, String forItem, Map<String, String> variables, WorkSpace scriptWorkSpace, WorkSpace executionWorkspace) {
-        Map<String, String> variablesClone = new LinkedHashMap<>(variables);
+        return executeSharingVariables(script, forItem, new LinkedHashMap<>(variables), scriptWorkSpace, executionWorkspace);
+    }
+
+    public String executeSharingVariables(String script, String forItem, Map<String, String> variables, WorkSpace scriptWorkSpace, WorkSpace executionWorkspace) {
         Log.log("Executing script "+script+(forItem == null ? "" : " for "+forItem)+" in "+executionWorkspace.getWorkdir());
         List<String> scriptLines = GitBeaver.fileResolver().resolve(
                 scriptWorkSpace.getWorkdir(),
                 scriptWorkSpace.getAbsolutePath(script+GitBeaver.BEAVER_EXTENSION),
-                variablesClone,
+                variables,
                 false);
         Expect.notNull(scriptLines).elseFail("Script file does not exist: "+script);
-        scriptLines.forEach(line -> executeLine(line, variablesClone, executionWorkspace));
-        String result = variablesClone.get(ScriptExecutor.RETURN_VALUE_VARIABLE);
+        scriptLines.forEach(line -> executeLine(line, variables, executionWorkspace));
+        String result = variables.get(ScriptExecutor.RETURN_VALUE_VARIABLE);
         if (result != null) {
             Log.log("Return value executing {}: {}", script, result);
         }

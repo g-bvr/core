@@ -125,4 +125,11 @@ public class FileUtil {
     public static void store(Path path, String text) {
         store(path, Collections.singletonList(text));
     }
+
+    public static void deleteFileIfExists(File file) {
+        if (file.exists() && !file.isDirectory()) {
+            Log.log("Deleting file "+file);
+            Expect.isTrue(file.delete()).elseFail("Could not delete file "+file);
+        }
+    }
 }

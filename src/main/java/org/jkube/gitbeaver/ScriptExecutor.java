@@ -25,11 +25,16 @@ public class ScriptExecutor {
     }
 
     public String execute(String script, String forItem, Map<String, String> variables, WorkSpace workSpace) {
-        return execute(script, forItem, variables, workSpace, workSpace);
+        return executeNotSharingVariables(script, forItem, variables, workSpace, workSpace);
     }
 
-    public String execute(String script, String forItem, Map<String, String> variables, WorkSpace scriptWorkSpace, WorkSpace executionWorkspace) {
-        return executeSharingVariables(script, forItem, new LinkedHashMap<>(variables), scriptWorkSpace, executionWorkspace);
+    public String executeNotSharingVariables(String script, String forItem, Map<String, String> variables, WorkSpace scriptWorkSpace, WorkSpace executionWorkspace) {
+        String returnValue = executeSharingVariables(script, forItem, new LinkedHashMap<>(variables), scriptWorkSpace, executionWorkspace);
+        if (returnValue != null)  {
+            // copy return value to non-shared variables
+            variables.put(ScriptExecutor.RETURN_VALUE_VARIABLE, returnValue);
+        }
+        return returnValue;
     }
 
     public String executeSharingVariables(String script, String forItem, Map<String, String> variables, WorkSpace scriptWorkSpace, WorkSpace executionWorkspace) {

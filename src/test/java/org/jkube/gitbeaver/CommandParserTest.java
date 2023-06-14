@@ -6,7 +6,6 @@ import org.jkube.gitbeaver.command.plugin.PluginCompileCommand;
 import org.jkube.gitbeaver.command.plugin.PluginsFreezeCommand;
 import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.gitbeaver.plugin.CorePlugin;
-import org.jkube.gitbeaver.plugin.PluginManager;
 import org.jkube.gitbeaver.util.test.TestUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -20,9 +19,6 @@ import java.util.Map;
 import static org.jkube.gitbeaver.CommandParser.REST;
 
 public class CommandParserTest {
-
-    public static final String SRC_TEST_RESOURCES = "src/test/resources";
-    public static final String WORKDIR = "workdir";
 
     @BeforeAll
     static void beforeTests() { TestUtil.beforeTests(); }
@@ -52,7 +48,7 @@ public class CommandParserTest {
     @Test
     void parsePluginCompile() {
         testParse("PLUGIN COMPILE", null, null);
-        testParse("PLUGIN COMPILE dir", PluginCompileCommand.class, Map.of("directory", "dir"));
+        testParse("PLUGIN COMPILE dir", PluginCompileCommand.class, Map.of("sources", "dir"));
     }
 
     @Test

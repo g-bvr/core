@@ -3,7 +3,7 @@
 echo $GITBEAVER_MASTERKEY > /masterkey
 # clear masterkey environment variable such that it cannot leak out
 export GITBEAVER_MASTERKEY=deleted
-java -cp main.jar:pubsub.jar:plugins org.jkube.gitbeaver.Main $@
+java -cp main.jar:lib/*:plugins org.jkube.gitbeaver.Main $@
 EXITCODE=$?
 if test $EXITCODE -ne 0
 then

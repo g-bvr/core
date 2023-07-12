@@ -5,22 +5,12 @@ import org.jkube.logging.Log;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
 
-    private static final Thread MAIN_THREAD = Thread.currentThread();
-
     public static void main(String[] args) {
-        Application.setFailureHandler((message, code) -> {
-            Log.exception(new RuntimeException("Failure captured: "+message));
-            if (Thread.currentThread().equals(MAIN_THREAD)) {
-                Log.error("Failure in main: {}", message);
-                Log.error("Terminating VM with error code: {}", code);
-                System.exit(code);
-            } else {
-                Log.error("Failure in execution thread: {}", message);
-            }
-        });
+        Application.setFailureHandler(new FailureHandler());
         Log.log("Running git-beaver {}", Main.class.getPackage().getImplementationVersion());
         GitBeaver.pluginManager().enableAllAvailablePlugins();
         GitBeaver.run(parseArgs(args));

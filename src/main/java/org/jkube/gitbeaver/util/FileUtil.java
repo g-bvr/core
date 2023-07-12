@@ -107,10 +107,12 @@ public class FileUtil {
     }
 
     public static void append(List<String> lines, File file) {
-        try (PrintWriter output = new PrintWriter(new FileWriter(file, true))) {
-            lines.forEach(output::println);
-        } catch (IOException e) {
-            Application.fail("could not append to file "+ file);
+        if ((lines != null) && !lines.isEmpty()) {
+            try (PrintWriter output = new PrintWriter(new FileWriter(file, true))) {
+                lines.forEach(output::println);
+            } catch (IOException e) {
+                Application.fail("could not append to file " + file);
+            }
         }
     }
 

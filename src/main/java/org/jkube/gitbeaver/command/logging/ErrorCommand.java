@@ -21,8 +21,9 @@ public class ErrorCommand extends AbstractCommand {
 
     @Override
     public void execute(Map<String, String> variables, WorkSpace workSpace, Map<String, String> arguments) {
-        GitBeaver.getApplicationLogger(variables).error(arguments.get(REST));
-        throw new RuntimeException("An error occured");
+        String error = arguments.get(REST);
+        GitBeaver.getApplicationLogger(variables).error(error);
+        throw new RuntimeException("ERROR: "+error);
     }
 
 }

@@ -47,7 +47,7 @@ public class CombinedApplicationLoggers implements ApplicationLogger {
 
     @Override
     public void error(String line) {
-        applicationLoggers.forEach(al -> al.warn(line));
+        applicationLoggers.forEach(al -> al.error(line));
     }
 
     @Override

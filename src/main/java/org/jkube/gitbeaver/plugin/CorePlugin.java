@@ -2,6 +2,7 @@ package org.jkube.gitbeaver.plugin;
 
 import org.jkube.gitbeaver.command.GitCloneCommand;
 import org.jkube.gitbeaver.command.logging.ErrorCommand;
+import org.jkube.gitbeaver.command.logging.ExceptionCommand;
 import org.jkube.gitbeaver.command.logging.LogCommand;
 import org.jkube.gitbeaver.command.logging.WarnCommand;
 import org.jkube.gitbeaver.command.plugin.PluginCompileCommand;
@@ -16,6 +17,7 @@ public class CorePlugin extends SimplePlugin {
                         """,
                 LogCommand.class,
                 WarnCommand.class,
+                ExceptionCommand.class,
                 ErrorCommand.class,
                 GitCloneCommand.class,
                 PluginCompileCommand.class,

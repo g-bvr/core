@@ -21,7 +21,7 @@ jobs:
     - name: Build the jar file
       run:  mvn -B package
     - name: Get docker tag
-      run: TAG=`grep "^    <version>.*</version>$" pom.xml | sed "s# *<[^>]*>##g"` && echo DockerImageTag=$TAG
+      run: echo TAG=`grep "^    <version>.*</version>$" pom.xml | sed "s# *<[^>]*>##g"` && echo "TAG=$TAG" >> $GITHUB_ENV
     - name:  Build docker image
       run: docker build . -t gitbeaver/core:$TAG
     - name:  Docker login

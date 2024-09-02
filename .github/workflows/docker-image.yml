@@ -23,8 +23,8 @@ jobs:
     - name: Get docker tag
       run: TAG=`grep "^    <version>.*</version>$" pom.xml | sed "s# *<[^>]*>##g"` && echo DockerImageTag=$TAG
     - name:  Build docker image
-      run: docker build . -t gitbeaver/core:main
+      run: docker build . -t gitbeaver/core:$TAG
     - name:  Docker login
       run: docker login -u gitbeaver -p ${{ secrets.GITBEAVER_PUSH_TOKEN }}
     - name:  Push docker image
-      run: docker push gitbeaver/core:main
+      run: docker push gitbeaver/core:$TAG

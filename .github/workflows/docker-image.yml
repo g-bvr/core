@@ -24,9 +24,11 @@ jobs:
       run: echo Docker Image gets tag $TAG or ${{ env.TAG }}
     - name: Build the jar file
       run:  mvn -B package
-    - name:  Build docker image
-      run: docker build . -t gitbeaver/core:$TAG
-    - name:  Docker login
-      run: docker login -u gitbeaver -p ${{ secrets.GITBEAVER_PUSH_TOKEN }}
-    - name:  Push docker image
-      run: docker push gitbeaver/core:$TAG
+    - name:  Build and push docker image
+      shell: bash
+        run: |
+            echo TAG=`grep "^    <version>.*</version>$" pom.xml | sed "s# *<[^>]*>##g"`
+            echo Docker Image will get tag $TAG
+            docker build . -t gitbeaver/core:$TAG
+            docker login -u gitbeaver -p ${{ secrets.GITBEAVER_PUSH_TOKEN }}
+            docker push gitbeaver/core:$TAG

@@ -19,8 +19,10 @@ jobs:
         distribution: 'zulu' # See 'Supported distributions' for available options
         java-version: '17'
     - name: Build the jar file
-      run:  mvn -B package -Dgit.branch=$BITBUCKET_BRANCH
-    - name:  Build docker image
+      run:  mvn -B package
+    - name: Get docker tag
+      run: TAG=$GITHUB_HEAD_REF-`grep "<version>.*</version>" pom.xml | sed "s#<.*version>##g"`
+    - name:  Build docker image $TAG
       run: docker build . -t gitbeaver/core:main
     - name:  Docker login
       run: docker login -u gitbeaver -p ${{ secrets.GITBEAVER_PUSH_TOKEN }}

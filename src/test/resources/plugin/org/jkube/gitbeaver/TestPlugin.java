@@ -2,7 +2,7 @@ package org.jkube.gitbeaver;
 
 import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.gitbeaver.plugin.SimplePlugin;
-import org.jkube.logging.Log;
+import org.jkube.gitbeaver.logging.Log;
 
 import java.util.List;
 

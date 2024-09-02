@@ -5,7 +5,7 @@ import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.gitbeaver.util.Environment;
 import org.jkube.gitbeaver.util.test.TestUtil;
-import org.jkube.logging.Log;
+import org.jkube.gitbeaver.logging.Log;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,11 +1,11 @@
 package org.jkube.gitbeaver;
 
 import org.jkube.gitbeaver.util.FileUtil;
-import org.jkube.util.Expect;
+import org.jkube.gitbeaver.util.Expect;
 
 import java.nio.file.Path;
 
-import static org.jkube.logging.Log.onException;
+import static org.jkube.gitbeaver.logging.Log.onException;
 
 public class WorkSpace {
 

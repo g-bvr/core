@@ -3,7 +3,7 @@ package org.jkube.gitbeaver.command.plugin;
 import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.SimpleCommand;
 import org.jkube.gitbeaver.WorkSpace;
-import org.jkube.logging.Log;
+import org.jkube.gitbeaver.logging.Log;
 
 import java.util.Map;
 

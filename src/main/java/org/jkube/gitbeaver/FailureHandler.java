@@ -1,10 +1,10 @@
 package org.jkube.gitbeaver;
 
-import org.jkube.logging.Log;
+import org.jkube.gitbeaver.logging.Log;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class FailureHandler implements org.jkube.application.FailureHandler  {
+public class FailureHandler implements org.jkube.gitbeaver.application.FailureHandler  {
     private static final Thread MAIN_THREAD = Thread.currentThread();
     public static final AtomicInteger NUM_CATCHING_BLOCKS = new AtomicInteger(0);
 

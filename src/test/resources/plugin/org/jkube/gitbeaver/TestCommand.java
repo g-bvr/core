@@ -1,6 +1,6 @@
 package org.jkube.gitbeaver;
 
-import org.jkube.logging.Log;
+import org.jkube.gitbeaver.logging.Log;
 
 import java.util.Map;
 

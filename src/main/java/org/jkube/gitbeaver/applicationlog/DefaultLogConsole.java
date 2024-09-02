@@ -1,7 +1,7 @@
 package org.jkube.gitbeaver.applicationlog;
 
 import org.jkube.gitbeaver.interfaces.LogConsole;
-import org.jkube.logging.Log;
+import org.jkube.gitbeaver.logging.Log;
 
 public class DefaultLogConsole implements LogConsole {
     @Override

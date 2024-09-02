@@ -1,6 +1,6 @@
 package org.jkube.gitbeaver;
 
-import org.jkube.logging.Log;
+import org.jkube.gitbeaver.logging.Log;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -8,8 +8,8 @@ import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static org.jkube.logging.Log.log;
-import static org.jkube.logging.Log.onException;
+import static org.jkube.gitbeaver.logging.Log.log;
+import static org.jkube.gitbeaver.logging.Log.onException;
 
 public class ExecutionQueue {
     

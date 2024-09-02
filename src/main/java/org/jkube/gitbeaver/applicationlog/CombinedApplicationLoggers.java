@@ -2,8 +2,8 @@ package org.jkube.gitbeaver.applicationlog;
 
 import org.jkube.gitbeaver.interfaces.ApplicationLogger;
 import org.jkube.gitbeaver.interfaces.LogConsole;
-import org.jkube.logging.Log;
-import org.jkube.util.Expect;
+import org.jkube.gitbeaver.logging.Log;
+import org.jkube.gitbeaver.util.Expect;
 
 import java.util.List;
 

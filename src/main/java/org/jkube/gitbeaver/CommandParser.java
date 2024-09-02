@@ -11,8 +11,8 @@ import org.jkube.gitbeaver.command.plugin.PluginsFreezeCommand;
 import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.gitbeaver.plugin.CorePlugin;
 import org.jkube.gitbeaver.plugin.SimplePlugin;
-import org.jkube.logging.Log;
-import org.jkube.util.Expect;
+import org.jkube.gitbeaver.logging.Log;
+import org.jkube.gitbeaver.util.Expect;
 
 import java.util.*;
 import java.util.regex.Matcher;

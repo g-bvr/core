@@ -1,7 +1,7 @@
 package org.jkube.gitbeaver.plugin;
 
 import org.jkube.gitbeaver.GitBeaver;
-import org.jkube.logging.Log;
+import org.jkube.gitbeaver.logging.Log;
 
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;

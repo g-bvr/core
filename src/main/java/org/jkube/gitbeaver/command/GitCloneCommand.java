@@ -7,7 +7,7 @@ import org.jkube.gitbeaver.WorkSpace;
 import java.net.URL;
 import java.util.Map;
 
-import static org.jkube.logging.Log.onException;
+import static org.jkube.gitbeaver.logging.Log.onException;
 
 /**
  * Usage: git clone providerUrl repositoryName [tag]

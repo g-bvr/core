@@ -1,6 +1,6 @@
 package org.jkube.gitbeaver.util.test;
 
-import org.jkube.application.Application;
+import org.jkube.gitbeaver.application.Application;
 
 import java.util.ArrayList;
 import java.util.List;

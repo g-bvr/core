@@ -3,15 +3,15 @@ package org.jkube.gitbeaver.plugin;
 import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.interfaces.Plugin;
 import org.jkube.gitbeaver.util.FileUtil;
-import org.jkube.logging.Log;
-import org.jkube.util.Expect;
+import org.jkube.gitbeaver.logging.Log;
+import org.jkube.gitbeaver.util.Expect;
 
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static org.jkube.logging.Log.onException;
+import static org.jkube.gitbeaver.logging.Log.onException;
 
 public class PluginManager {
 

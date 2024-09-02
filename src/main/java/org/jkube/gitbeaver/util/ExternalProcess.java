@@ -1,7 +1,7 @@
 package org.jkube.gitbeaver.util;
 
 import org.jkube.gitbeaver.interfaces.LogConsole;
-import org.jkube.logging.Log;
+import org.jkube.gitbeaver.logging.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,8 +13,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
-import static org.jkube.logging.Log.debug;
-import static org.jkube.logging.Log.log;
+import static org.jkube.gitbeaver.logging.Log.debug;
+import static org.jkube.gitbeaver.logging.Log.log;
 
 public class ExternalProcess {
 

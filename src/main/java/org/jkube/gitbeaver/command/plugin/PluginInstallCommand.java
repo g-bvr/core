@@ -4,7 +4,7 @@ import org.jkube.gitbeaver.GitBeaver;
 import org.jkube.gitbeaver.SimpleCommand;
 import org.jkube.gitbeaver.WorkSpace;
 import org.jkube.gitbeaver.external.ShellExecutor;
-import org.jkube.logging.Log;
+import org.jkube.gitbeaver.logging.Log;
 
 import java.util.List;
 import java.util.Map;

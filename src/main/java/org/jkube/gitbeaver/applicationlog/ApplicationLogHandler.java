@@ -2,7 +2,7 @@ package org.jkube.gitbeaver.applicationlog;
 
 import org.jkube.gitbeaver.interfaces.ApplicationLogger;
 import org.jkube.gitbeaver.interfaces.ApplicationLoggerFactory;
-import org.jkube.util.Expect;
+import org.jkube.gitbeaver.util.Expect;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

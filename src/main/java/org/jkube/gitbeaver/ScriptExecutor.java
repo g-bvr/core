@@ -2,8 +2,8 @@ package org.jkube.gitbeaver;
 
 import org.jkube.gitbeaver.interfaces.Command;
 import org.jkube.gitbeaver.util.VariableSubstitution;
-import org.jkube.logging.Log;
-import org.jkube.util.Expect;
+import org.jkube.gitbeaver.logging.Log;
+import org.jkube.gitbeaver.util.Expect;
 
 import java.util.LinkedHashMap;
 import java.util.List;

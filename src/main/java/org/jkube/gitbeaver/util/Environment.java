@@ -1,6 +1,6 @@
 package org.jkube.gitbeaver.util;
 
-import org.jkube.util.Expect;
+import org.jkube.gitbeaver.util.Expect;
 
 import java.nio.file.Path;
 import java.util.LinkedHashMap;

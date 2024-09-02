@@ -6,7 +6,7 @@ import org.jkube.gitbeaver.external.GitCloner;
 import org.jkube.gitbeaver.interfaces.FileResolver;
 import org.jkube.gitbeaver.plugin.CorePlugin;
 import org.jkube.gitbeaver.plugin.PluginManager;
-import org.jkube.logging.Log;
+import org.jkube.gitbeaver.logging.Log;
 
 import java.nio.file.Path;
 import java.util.Map;

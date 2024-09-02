@@ -6,8 +6,8 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import static org.jkube.logging.Log.error;
-import static org.jkube.logging.Log.interruptable;
+import static org.jkube.gitbeaver.logging.Log.error;
+import static org.jkube.gitbeaver.logging.Log.interruptable;
 
 public abstract class OutputReader {
 

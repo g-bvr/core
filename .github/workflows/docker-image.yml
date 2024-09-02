@@ -18,15 +18,11 @@ jobs:
       with:
         distribution: 'zulu' # See 'Supported distributions' for available options
         java-version: '17'
-    - name: Get docker tag
-      run: echo TAG=`grep "^    <version>.*</version>$" pom.xml | sed "s# *<[^>]*>##g"` && echo "TAG=$TAG" >> $GITHUB_ENV
-    - name: Show docker tag
-      run: echo Docker Image gets tag $TAG or ${{ env.TAG }}
     - name: Build the jar file
       run:  mvn -B package
     - name:  Build and push docker image
       shell: bash
-        run: |
+      run: |
             echo TAG=`grep "^    <version>.*</version>$" pom.xml | sed "s# *<[^>]*>##g"`
             echo Docker Image will get tag $TAG
             docker build . -t gitbeaver/core:$TAG

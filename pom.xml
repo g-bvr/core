@@ -6,6 +6,27 @@
     <groupId>org.jkube</groupId>
     <artifactId>git-beaver</artifactId>
     <version>0.2.0</version>
+    <properties>
+        <junit.version>5.5.2</junit.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <dockerfile.skip>false</dockerfile.skip>
+        <docker.image>core</docker.image>
+        <docker.repo.user>gitbeaver</docker.repo.user>
+        <main.class>org.jkube.gitbeaver.Main</main.class>
+        <java.version>15</java.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.plugin.version>3.8.0</maven.plugin.version>
+        <jar.name>main</jar.name>
+
+        <!-- Docker -->
+        <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
+        <dockerfile.build.squash>false</dockerfile.build.squash>
+        <docker.repo>docker.io</docker.repo>
+        <git.branch>main</git.branch>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
     <build>
         <extensions>
             <extension>
@@ -210,27 +231,6 @@
             </plugin>
         </plugins>
     </build>
-    <properties>
-        <junit.version>5.5.2</junit.version>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <dockerfile.skip>false</dockerfile.skip>
-        <docker.image>core</docker.image>
-        <docker.repo.user>gitbeaver</docker.repo.user>
-        <main.class>org.jkube.gitbeaver.Main</main.class>
-        <java.version>15</java.version>
-
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.plugin.version>3.8.0</maven.plugin.version>
-        <jar.name>main</jar.name>
-
-        <!-- Docker -->
-        <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
-        <dockerfile.build.squash>false</dockerfile.build.squash>
-        <docker.repo>docker.io</docker.repo>
-        <git.branch>master</git.branch>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>

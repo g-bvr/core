@@ -135,7 +135,7 @@
                             <goal>push</goal>
                         </goals>
                         <configuration>
-                            <tag>${git.branch}-${project.version}</tag>
+                            <tag>main-${project.version}</tag>
                         </configuration>
                     </execution>
                     <execution>
@@ -146,7 +146,7 @@
                             <goal>push</goal>
                         </goals>
                         <configuration>
-                            <tag>${git.branch}</tag>
+                            <tag>latest</tag>
                         </configuration>
                     </execution>
                 </executions>

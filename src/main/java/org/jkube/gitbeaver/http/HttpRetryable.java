@@ -1,7 +1,7 @@
 package org.jkube.gitbeaver.http;
 
 import org.jkube.gitbeaver.application.RetryableResult;
-import org.jkube.util.Utf8;
+import org.jkube.gitbeaver.util.Utf8;
 
 import java.io.IOException;
 import java.net.ConnectException;

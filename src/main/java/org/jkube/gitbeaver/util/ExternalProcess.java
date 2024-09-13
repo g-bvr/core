@@ -158,32 +158,32 @@ public class ExternalProcess {
 	protected void processOutputLine(String line, LogConsole console, boolean error) {
 		if ((lineFilter != null) && !lineFilter.test(line)) {
 			console.ignore(line);	
-			log("IGNORE> "+line);
+			debug("IGNORE> "+line);
 		} else if ((successMarker != null) && matches(line, successMarker)) {
 			successMarkerFound = true;
 			console.success(line);
 			output.add(line);
-			log("SUCCESS> "+line);
+			debug("SUCCESS> "+line);
 		} else if (error && matches(line, acceptedErrorLines)) {
 			console.ignore(line);						
 			output.add(line);
-			log("ACCEPT> "+line);
+			debug("ACCEPT> "+line);
 		} else if (matches(line, warningLines)) {
 			console.warn(line);
 			warnings.add(line); 
-			log("WARN> "+line);
+			debug("WARN> "+line);
 		} else if (error) {
 			console.error(line);
 			errors.add(line);
-			log("ERROR> "+line);
+			debug("ERROR> "+line);
 		} else if (matches(line, errorOutputLines)) {
 			console.error(line);						
 			errors.add(line);
-			log("ERROR> "+line);
+			debug("ERROR> "+line);
 		} else {
 			console.log(line);
 			output.add(line);
-			log("OUTPUT> "+line);
+			debug("OUTPUT> "+line);
 		}
 	}
 

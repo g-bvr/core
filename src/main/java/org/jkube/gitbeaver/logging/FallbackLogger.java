@@ -7,11 +7,28 @@ import java.io.PrintStream;
 
 public class FallbackLogger implements Logger {
 
+	private String previous = "";
+	private int count = 0;
+
 	@Override
 	public void log(final LogLevel level, final Throwable e, final String message, final Object[] parameters) {
 		PrintStream logto = level.compareTo(LogLevel.LOG) < 0 ? System.err : System.out;
 		if (message != null) {
-			logto.println(substitute(message, parameters));
+			String line = substitute(message, parameters);
+			if (line.equals(previous)) {
+				count++;
+			} else {
+				if (count > 0) {
+					int p = 0;
+					while (p < line.length() && (line.charAt(p) == ' ')) {
+						p++;
+					}
+					logto.println(" ".repeat(p)+"(repeated "+count+" times)");
+					count = 0;
+				}
+				logto.println(line);
+				previous = line;
+			}
 		}
 		if (e != null) {
 			e.printStackTrace();

@@ -56,7 +56,7 @@ public class FileUtil {
 
     public static void createIfNotExists(Path path) {
         if (!path.toFile().exists()) {
-            Log.log("Creating target directory "+path);
+            Log.debug("Creating target directory "+path);
             Expect.isTrue(path.toFile().mkdirs())
                     .elseFail("Could not create target directory "+path);
         }

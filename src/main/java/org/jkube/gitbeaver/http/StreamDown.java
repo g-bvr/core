@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import static org.jkube.logging.Log.debug;
+import static org.jkube.gitbeaver.logging.Log.debug;
 
 public class StreamDown implements StreamReader<String> {
 

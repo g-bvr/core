@@ -1,8 +1,8 @@
 package org.jkube.gitbeaver.http;
 
-import org.jkube.application.Retry;
-import org.jkube.application.RetryableResult;
-import org.jkube.util.Utf8;
+import org.jkube.gitbeaver.application.Retry;
+import org.jkube.gitbeaver.application.RetryableResult;
+import org.jkube.gitbeaver.util.Utf8;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
-import static org.jkube.logging.Log.warn;
+import static org.jkube.gitbeaver.logging.Log.warn;
 
 public class Http {
 

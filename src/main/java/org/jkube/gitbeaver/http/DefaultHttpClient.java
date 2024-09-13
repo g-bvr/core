@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-import static org.jkube.application.Application.fail;
-import static org.jkube.logging.Log.onException;
+import static org.jkube.gitbeaver.application.Application.fail;
+import static org.jkube.gitbeaver.logging.Log.onException;
 
 public class DefaultHttpClient implements HttpClientFacade {
 

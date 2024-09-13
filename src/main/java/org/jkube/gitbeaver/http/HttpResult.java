@@ -2,7 +2,7 @@ package org.jkube.gitbeaver.http;
 
 import java.io.InputStream;
 
-import static org.jkube.logging.Log.debug;
+import static org.jkube.gitbeaver.logging.Log.debug;
 
 public class HttpResult {
 

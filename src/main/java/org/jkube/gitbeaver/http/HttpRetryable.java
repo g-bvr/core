@@ -1,6 +1,6 @@
 package org.jkube.gitbeaver.http;
 
-import org.jkube.application.RetryableResult;
+import org.jkube.gitbeaver.application.RetryableResult;
 import org.jkube.util.Utf8;
 
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.net.ConnectException;
 import java.net.http.HttpTimeoutException;
 import java.util.List;
 
-import static org.jkube.application.Application.fail;
+import static org.jkube.gitbeaver.application.Application.fail;
 
 public class HttpRetryable<R> implements RetryableResult<R> {
 

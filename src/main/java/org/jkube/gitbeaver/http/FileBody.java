@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.function.Supplier;
 
-import static org.jkube.logging.Log.onException;
+import static org.jkube.gitbeaver.logging.Log.onException;
 
 public class FileBody implements Supplier<InputStream> {
 

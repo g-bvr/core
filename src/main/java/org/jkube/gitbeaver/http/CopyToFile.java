@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
-import static org.jkube.logging.Log.debug;
+import static org.jkube.gitbeaver.gitbeaver.logging.Log.debug;
 
 public class CopyToFile implements StreamReader<String> {
 

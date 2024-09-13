@@ -1,11 +1,11 @@
 package org.jkube.gitbeaver.http;
 
-import org.jkube.util.Utf8;
+import org.jkube.gitbeaver.util.Utf8;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import static org.jkube.logging.Log.debug;
+import static org.jkube.gitbeaver.logging.Log.debug;
 
 public class ResponseDebug implements StreamReader<String> {
 

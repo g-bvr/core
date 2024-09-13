@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.jkube</groupId>
     <artifactId>git-beaver</artifactId>
-    <version>0.2.0</version>
+    <version>0.2.1</version>
     <properties>
         <junit.version>5.5.2</junit.version>
         <maven.compiler.source>17</maven.compiler.source>

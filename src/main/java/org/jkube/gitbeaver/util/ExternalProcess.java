@@ -8,20 +8,25 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 import static org.jkube.gitbeaver.logging.Log.debug;
-import static org.jkube.gitbeaver.logging.Log.log;
 
 public class ExternalProcess {
+
+	// key of variable that stores anv settings MAP (env settings will be saved as value in comma separated form: k1=v1,k2=v2,..
+	public static final String ENV_MAP_KEY = "ENV_VARIABLES_MAP";
 
 	private static final long INITIAL_TIMEOUT = 15*60L; // 15 minutes
 	private static final long DESTROY_SLEEP = 1000;
 	private static final long RUNTIME_WARN = 10;
 
+	private final Map<String, String> envVariables;
 	private final List<String> output = new ArrayList<>();
 	private final List<String> warnings = new ArrayList<>();
 	private final List<String> errors = new ArrayList<>();
@@ -41,6 +46,20 @@ public class ExternalProcess {
 
 	private LogConsole logConsole;
 
+	public ExternalProcess(Map<String, String> variables) {
+		this.envVariables = new LinkedHashMap<>();
+		String envVarsEncoded = variables == null ? null : variables.get(ENV_MAP_KEY);
+		if (envVarsEncoded != null) {
+			for (String kvs : envVarsEncoded.split(",")) {
+				String[] kva = kvs.split("=");
+				if (kva.length != 2) {
+					error("Value of variable "+ENV_MAP_KEY+" is not a comma separated list of strings of form k=v: "+kvs);
+				}
+				envVariables.put(kva[0], kva[1]);
+			}
+		}
+	}
+
 	public ExternalProcess command(List<String> command) {
 		return command(command.toArray(new String[0]));
 	}
@@ -54,6 +73,7 @@ public class ExternalProcess {
 
 	public ExternalProcess command(String... command) {
 		this.pb = new ProcessBuilder(command);
+		this.pb.environment().putAll(envVariables);
 		this.successMarker = null;
 		this.command = joinWithSpaces(command);
 		this.loggedCommand = this.command;

@@ -41,7 +41,7 @@ public class GitCloneCommand extends AbstractCommand {
         String repository = arguments.get(REPOSITORY);
         String tag = arguments.get(TAG);
         URL url = onException(() -> new URL(urlString)).fail("Could not parse url "+urlString);
-        GitBeaver.gitCloner().clone(workSpace.getWorkdir(), url, repository, tag, GitBeaver.getApplicationLogger(variables));
+        GitBeaver.gitCloner().clone(workSpace.getWorkdir(), url, repository, tag, GitBeaver.getApplicationLogger(variables), variables);
     }
 
 }

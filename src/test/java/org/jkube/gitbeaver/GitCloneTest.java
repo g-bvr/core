@@ -38,7 +38,7 @@ public class GitCloneTest {
     void simulateCloneTest() {
         GitCloner cloner = new GitCloner();
         cloner.doSimulatedCloning(Path.of(SRC_TEST_RESOURCES));
-        cloner.clone(Path.of(WORKDIR), null, PLUGIN, null, LOGGER);
+        cloner.clone(Path.of(WORKDIR), null, PLUGIN, null, LOGGER, null);
         TestUtil.assertNoFailures();
         Assertions.assertTrue(new File(WORKDIR+"/"+PLUGIN+"/org").exists());
         FileUtil.delete(Path.of(WORKDIR + "/" + PLUGIN));
@@ -47,7 +47,7 @@ public class GitCloneTest {
     @Test
     void realCloneTest() throws MalformedURLException {
         GitCloner cloner = new GitCloner();
-        cloner.clone(Path.of(WORKDIR), new URL(GIT_URL), REPOSITORY, null, LOGGER);
+        cloner.clone(Path.of(WORKDIR), new URL(GIT_URL), REPOSITORY, null, LOGGER, null);
         TestUtil.assertNoFailures();
         Assertions.assertTrue(new File(WORKDIR+"/"+REPOSITORY+"/pom.xml").exists());
         FileUtil.delete(Path.of(WORKDIR + "/" + REPOSITORY));
@@ -56,7 +56,7 @@ public class GitCloneTest {
     @Test
     void realCloneTagTest() throws MalformedURLException {
         GitCloner cloner = new GitCloner();
-        cloner.clone(Path.of(WORKDIR), new URL(GIT_URL), REPOSITORY, "main", LOGGER);
+        cloner.clone(Path.of(WORKDIR), new URL(GIT_URL), REPOSITORY, "main", LOGGER, null);
         TestUtil.assertNoFailures();
         Assertions.assertTrue(new File(WORKDIR+"/"+REPOSITORY+"/pom.xml").exists());
         FileUtil.delete(Path.of(WORKDIR + "/" + REPOSITORY));

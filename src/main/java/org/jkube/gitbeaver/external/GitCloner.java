@@ -1,12 +1,12 @@
 package org.jkube.gitbeaver.external;
 
-import org.jkube.gitbeaver.applicationlog.DefaultLogConsole;
 import org.jkube.gitbeaver.interfaces.ApplicationLogger;
 import org.jkube.gitbeaver.util.ExternalProcess;
 import org.jkube.gitbeaver.util.FileUtil;
 
 import java.net.URL;
 import java.nio.file.Path;
+import java.util.Map;
 
 public class GitCloner {
 
@@ -20,18 +20,18 @@ public class GitCloner {
         simulateClonePath = repositoryPathOrNull == null ? null : Path.of(repositoryPathOrNull);
     }
 
-    public void clone(Path workdir, URL gitUrl, String repository, String tag, ApplicationLogger logger) {
-        clone(workdir, gitUrl, gitUrl, repository, tag, logger);
+    public void clone(Path workdir, URL gitUrl, String repository, String tag, ApplicationLogger logger, Map<String, String> variables) {
+        clone(workdir, gitUrl, gitUrl, repository, tag, logger, variables);
     }
 
-    public void clone(Path workdir, URL gitUrl, URL maskedGitUrl, String repository, String tag, ApplicationLogger logger) {
+    public void clone(Path workdir, URL gitUrl, URL maskedGitUrl, String repository, String tag, ApplicationLogger logger, Map<String, String> variables) {
         if (simulateClonePath != null) {
             Path sourcePath = createSimulatedGitPath(repository, tag);
             Path targetPath = workdir.resolve(repository);
             FileUtil.createIfNotExists(targetPath.getParent());
             FileUtil.copyTree(sourcePath, targetPath);
         } else {
-            ExternalProcess clone = new ExternalProcess();
+            ExternalProcess clone = new ExternalProcess(variables);
             String url = gitUrl+"/"+repository;
             String maskedUrl = maskedGitUrl+"/"+repository;
             if (tag == null) {

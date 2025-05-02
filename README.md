@@ -68,4 +68,4 @@ such a worker thread that continues running and keeps the JVM active until the w
 
 A [docker file](https://hub.docker.com/r/gitbeaver/release) with a curated selection of plugins is provided by E. Breuninger GmbH & Co. in the public repository
 [e-breuninger/git-beaver](https://github.com/e-breuninger/git-beaver). The code of all used plugins has been reviewed for potential vulnerabilkities and the
-plugin state of this release is frozen, i.e. the activation of additional custom plugins at runtime is prevented.  
+plugin state of this release is frozen, i.e. the activation of additional custom plugins at runtime is prevented.

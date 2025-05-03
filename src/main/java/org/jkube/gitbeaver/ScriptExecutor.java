@@ -62,7 +62,7 @@ public class ScriptExecutor {
         currentSubstitutedLine = substituted;
         Command command = commandParser.parseCommand(substituted, arguments);
         if (command != null) {
-            System.out.println("Executing command: "+command+" in workspace: "+workSpace+" with args: "+arguments);
+            //System.out.println("Executing command: "+command+" in workspace: "+workSpace+" with args: "+arguments);
             command.execute(variables, workSpace, arguments);
         }
     }

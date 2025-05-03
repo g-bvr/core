@@ -21,7 +21,7 @@ public class GitCloneTest {
     public static final String WORKDIR = "workdir";
     public static final String PLUGIN = "plugin";
     private static final String GIT_URL = "https://github.com/g-bvr";
-    private static final String REPOSITORY = "base";
+    private static final String REPOSITORY = "core";
 
     private static final ApplicationLogger LOGGER = new DefaultLogger("test");
 
